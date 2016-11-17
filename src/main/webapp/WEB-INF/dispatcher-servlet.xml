@@ -14,11 +14,9 @@
     <context:component-scan base-package="com.yubao.controller"/>
 
     <!-- 静态资源(js、image等)的访问 -->
-    <!--<mvc:resources mapping="/Resources/**" location="/Resources/" />-->
+    <mvc:resources mapping="/Resources/**" location="/Resources/" />
     <!--<mvc:resources mapping="/Scripts/**" location="/Scripts/" />-->
     <!--<mvc:resources mapping="/Styles/**" location="/Styles/" />-->
-
-    <!--<bean name="/hello" class="com.yubao.controller.MainController"/>-->
 
     <!-- 开启注解 -->
     <mvc:annotation-driven/>
