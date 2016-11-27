@@ -1,6 +1,5 @@
 package com.yubao.controller;
 
-import org.springframework.format.Printer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,14 +19,14 @@ public class MainController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "hello";
+        return "index";
     }
 
 
     @RequestMapping(value = "/getmodel", method = RequestMethod.GET)
     public ModelAndView GetWithModel() {
-        ModelAndView modelAndView = new ModelAndView("hello");
-        modelAndView.addObject("hello", "yubao");
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("index", "yubao");
         return modelAndView;
     }
 
