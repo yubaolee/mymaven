@@ -1,6 +1,7 @@
 package com.yubao.service.Impl;
 
 import com.yubao.dao.SysconfDao;
+import com.yubao.model.Sysconf;
 import com.yubao.service.SysconfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,8 @@ public class SysconfServiceImpl implements SysconfService {
 
     @Resource
     SysconfDao _dao;
+
     public String getVersion() {
-        return _dao.getVersion();
+        return _dao.getVersion().getValue();
     }
 }
