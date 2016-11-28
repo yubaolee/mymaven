@@ -10,8 +10,8 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!--指明 controller 所在包，并扫描其中的注解-->
-    <context:component-scan base-package="com.yubao.controller"/>
+    <!--指明 controller 所在包，并扫描其中的注解,千万不要只扫描controller-->
+    <context:component-scan base-package="com.yubao"/>
 
     <!-- 静态资源(js、image等)的访问 -->
     <mvc:resources mapping="/Resources/**" location="/Resources/" />
@@ -20,6 +20,24 @@
 
     <!-- 开启注解 -->
     <mvc:annotation-driven/>
+
+    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/> <!-- JSON转换器 -->
+            </list>
+        </property>
+    </bean>
 
     <!-- ViewResolver 视图解析器  -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

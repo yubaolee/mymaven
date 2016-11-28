@@ -38,7 +38,7 @@
     </div>
     <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
-            <i class="layui-icon" style="color: #FBDAC7; color: rgba(255,255,255,.5);"></i>
+            <i class="layui-icon" style="color: #FBDAC7; color: rgba(255,255,255,.5);">&#xe620;</i>
         </div>
         <div class="layui-anim site-desc site-desc-anim">
             <cite>简洁实用的工作流引擎，教科书级设计，可作为《企业应用架构模式》《ASP.NET设计模式》参考代码</cite>
@@ -46,7 +46,7 @@
         <div class="site-download">
             <a href="http://183.230.7.248:13144/Login/Index" class="layui-inline layui-btn layui-btn-normal" target="_blank">
                 <cite class="layui-icon"></cite>
-                在线Demo
+                在线演示
             </a>
 
             <a href="https://git.oschina.net/yubaolee/OpenAuth.Net" class="layui-inline site-down" target="_blank">

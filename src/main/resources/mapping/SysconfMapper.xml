@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yubao.dao.SysconfDao">
+
+    <resultMap id="SysconfMap" type="com.yubao.model.Sysconf">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="key" property="key" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getVersion" resultMap="String">
+        SELECT * FROM sysconf  WHERE key='version'
+    </select>
+
+</mapper>
