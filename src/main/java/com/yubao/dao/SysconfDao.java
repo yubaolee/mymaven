@@ -10,5 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface SysconfDao {
     //如果采用sql的话，可以不用SqlSessionFactoryBean配置里的mapperLocations
     //@Select("SELECT * FROM sysconf  WHERE `key`='version' LIMIT 1")
-    Sysconf getVersion();
+    String getVersion();
+
+    int getDownload();
+    void addDownload();
 }

@@ -16,17 +16,20 @@ window.tctipConfig = {
     }
 };
 
-//一般直接写在一个js文件中
-layui.use(['layer', 'form'], function(){
-    var layer = layui.layer,form = layui.form();
+layui.use('element', function() {
+    var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
 
+    //监听导航点击
+    element.on('nav(demo)', function(elem) {
+        //console.log(elem)
+        layer.msg(elem.text());
+    });
 });
 
-//百度统计
-var _hmt = _hmt || [];
-(function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?0558502420ce5fee054b31425e77ffa6";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-})();
+$(function(){
+   $("#downloadBtn").click(function(){
+       $.post("main/addDownload",function (data) {
+           //下载数增加
+       });
+   }) ;
+});

@@ -19,6 +19,14 @@ public class SysconfServiceImpl implements SysconfService {
     SysconfDao _dao;
 
     public String getVersion() {
-        return _dao.getVersion().getValue();
+        return _dao.getVersion();
+    }
+
+    public int getDownload() {
+        return _dao.getDownload();
+    }
+
+    public void addDownload() {
+        _dao.addDownload();
     }
 }

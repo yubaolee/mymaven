@@ -2,14 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>OpenAuth.net官方社区 - 基于DDD的权限管理系统</title>
-    <meta name="Keywords" content="openauth.net,Openauth,权限管理,工作流,workflow">
-    <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
-    <link rel="stylesheet" href="Resources/layui/css/layui.css">
-    <link rel="stylesheet" href="Resources/global.css">
-    <link rel="stylesheet" href="Resources/layui/css/modules/layer/default/layer.css">
+    <jsp:include page="Resources/layout/header.jsp"></jsp:include>
 </head>
 <body  class="site-home" id="LAY_home" style="background-color: #eee;">
 <div class="layui-header header header-index">
@@ -21,15 +14,15 @@
 
         <ul class="layui-nav">
             <li class="layui-nav-item ">
-                <a href="http://www.w3cschool.cn/openauthdotnet/e8931tly.html" target="_blank">文档</a>
+                <a href="http://www.w3cschool.cn/openauthdotnet/e8931tly.html">文档</a>
             </li>
             <li class="layui-nav-item ">
-                <a href="https://git.oschina.net/yubaolee/OpenAuth.Net/issues" target="_blank">提交BUG</a>
+                <a href="https://git.oschina.net/yubaolee/OpenAuth.Net/issues">提交BUG</a>
             </li>
             <li class="layui-nav-item">
-                <a href="http://www.cnblogs.com/yubaolee/" target="_blank">我的博客</a>
+                <a href="http://www.cnblogs.com/yubaolee/">我的博客</a>
             </li>
-            <span class="layui-nav-bar"></span></ul>
+        </ul>
     </div>
 </div>
 
@@ -49,16 +42,12 @@
                 在线演示
             </a>
 
-            <a href="https://git.oschina.net/yubaolee/OpenAuth.Net" class="layui-inline site-down" target="_blank">
+            <a id="downloadBtn" href="https://git.oschina.net/yubaolee/OpenAuth.Net" class="layui-inline site-down" target="_blank">
                 <cite class="layui-icon"></cite>
                 立即下载
             </a>
         </div>
-        <div class="site-version">
-            <span>当前版本：<cite class="site-showv">2.0</cite></span>
-            <span><a href="http://www.w3cschool.cn/openauthdotnet/e8931tly.html" target="_blank">更新日志</a></span>
-            <span>下载量：<em class="site-showdowns">4221</em></span>
-        </div>
+        <jsp:include page="/main/getversion"></jsp:include>
         <div class="site-banner-other">
             <%--<iframe src="http://ghbtns.com/github-btn.html?user=sentsin&amp;repo=layui&amp;type=watch&amp;count=true" height="20" width="105"></iframe>--%>
             <%--<iframe src="http://ghbtns.com/github-btn.html?user=sentsin&amp;repo=layui&amp;type=fork&amp;count=true" height="20" width="60"></iframe>--%>
@@ -101,7 +90,9 @@
 </div>
 
 <script src="Resources/layui/layui.js"></script>
-<script src="Resources/index.js"></script>
+<script src="Resources/jquery.js"></script>
+<script src="blljs/index.js"></script>
 <script src="Resources/tctip-master/js/tctip.min.js"></script>
+<script src="blljs/statistics.js"></script>
 </body>
 </html>

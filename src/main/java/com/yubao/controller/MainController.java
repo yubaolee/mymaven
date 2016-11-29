@@ -1,10 +1,6 @@
 package com.yubao.controller;
 
 import com.yubao.service.SysconfService;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 
 /**
@@ -21,7 +16,7 @@ import java.io.PrintWriter;
  * Created by Administrator on 2016-11-17.
  */
 @Controller
-@RequestMapping(value="/Main")
+@RequestMapping(value="/main")
 public class MainController {
 
     @Resource
@@ -29,24 +24,25 @@ public class MainController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "version";
     }
 
 
-    @RequestMapping(value = "/getmodel", method = RequestMethod.GET)
-    public ModelAndView GetWithModel() {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("index", "yubao");
+    /**
+     * 获取版本信息
+     * @return
+     */
+    @RequestMapping(value = "/getversion", method = RequestMethod.GET)
+    public ModelAndView GetVersion() {
+        ModelAndView modelAndView = new ModelAndView("version");
+        modelAndView.addObject("version", _service.getVersion());
+        modelAndView.addObject("download", _service.getDownload());
         return modelAndView;
     }
 
-    /**
-     * 直接返回string
-     * @param out 输出流
-     */
-    @ResponseBody
-    @RequestMapping(value="/getversion", method = RequestMethod.GET)
-    public void Get(PrintWriter out) throws IOException {
-        out.write(_service.getVersion());
+    @RequestMapping(value="/addDownload", method = RequestMethod.POST)
+    public void AddDownload(PrintWriter out) throws IOException {
+        _service.addDownload();
+        out.print("ok");
     }
 }
