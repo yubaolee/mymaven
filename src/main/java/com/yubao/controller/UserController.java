@@ -63,13 +63,14 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public void addUser(HttpServletResponse out, String account, String pwd) throws IOException {
+    public void addUser(HttpServletResponse out,String name, String account, String pwd) throws IOException {
         out.setContentType("text/html; charset=utf-8");
         try {
 
             User user = new User();
             user.setId(UUID.randomUUID().toString());
-            user.setName(account);
+            user.setName(name);
+            user.setAccount(account);
             user.setPwd(MD5.Encode(pwd));
             user.setCreatetime(new Date());
             service.insert(user);

@@ -31,7 +31,7 @@
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">昵称</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="text" id="L_username" name="name" required lay-verify="required" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">

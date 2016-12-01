@@ -65,7 +65,7 @@
             <div class="edge">
 
 
-                <h3 class="page-title">活跃用户 - TOP 8</h3>
+                <h3 class="page-title">新注册用户</h3>
                 <div class="user-looklog leifeng-rank">
                     <span>
         <a href="user/home.html">
