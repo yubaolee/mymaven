@@ -2,23 +2,19 @@ package com.yubao.controller;
 
 import com.util.Const;
 import com.util.MD5;
+import com.util.Response;
 import com.yubao.model.User;
 import com.yubao.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * Created by Administrator on 2016-11-29.
@@ -52,8 +48,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public void getUser(HttpServletRequest request, HttpServletResponse out) throws IOException {
         out.setContentType("text/html; charset=utf-8");
-        response.Status = false;
-        response.Message ="";
+        Response resp = new Response();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -62,15 +57,15 @@ public class UserController extends BaseController {
                     String id = cookie.getValue();
                     if(id != null && !id.equals("")){
                         User user = service.selectByPrimaryKey(id);
-                        response.Status = true;
-                        response.Result = user;
+                        resp.Status = true;
+                        resp.Result = user;
                         break;
                     }
                 }
             }
         }
 
-        out.getWriter().print(gson.toJson(response));
+        out.getWriter().print(gson.toJson(resp));
     }
 
     @ResponseBody
@@ -80,12 +75,10 @@ public class UserController extends BaseController {
         try {
 
             User user = new User();
-            user.setId(UUID.randomUUID().toString());
             user.setName(name);
             user.setAccount(account);
-            user.setPic(new Random(8).toString() +".jpg");
             user.setPwd(MD5.Encode(pwd));
-            user.setCreatetime(new Date());
+
             service.insert(user);
             response.Status = true;
         } catch (Exception e) {

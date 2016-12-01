@@ -12,7 +12,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2016-11-30.
@@ -36,10 +39,13 @@ public class UserServiceImpl implements UserService {
     public int insert(User record) throws Exception {
         UserExample exp = new UserExample();
         UserExample.Criteria criteria = exp.createCriteria();
-        criteria.andAccountEqualTo(record.getName());
+        criteria.andAccountEqualTo(record.getAccount());
         if(countByExample(exp) > 0)
             throw new Exception("账号已存在");
 
+        record.setId(UUID.randomUUID().toString());
+        record.setPic(new Random().nextInt(9) +".jpg");
+        record.setCreatetime(new Date());
         return _mapper.insert(record);
     }
 
