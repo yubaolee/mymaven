@@ -11,7 +11,7 @@ public class User {
 
     private String pwd;
 
-    private Integer viplevel;
+    private int viplevel;
 
     private Date createtime;
 
@@ -21,9 +21,9 @@ public class User {
 
     private String qqopenid;
 
-    private Integer questioncnt;
+    private int questioncnt;
 
-    private Integer answercnt;
+    private int answercnt;
 
     private String pic;
 
@@ -59,11 +59,11 @@ public class User {
         this.pwd = pwd;
     }
 
-    public Integer getViplevel() {
+    public int getViplevel() {
         return viplevel;
     }
 
-    public void setViplevel(Integer viplevel) {
+    public void setViplevel(int viplevel) {
         this.viplevel = viplevel;
     }
 
@@ -99,19 +99,19 @@ public class User {
         this.qqopenid = qqopenid;
     }
 
-    public Integer getQuestioncnt() {
+    public int getQuestioncnt() {
         return questioncnt;
     }
 
-    public void setQuestioncnt(Integer questioncnt) {
+    public void setQuestioncnt(int questioncnt) {
         this.questioncnt = questioncnt;
     }
 
-    public Integer getAnswercnt() {
+    public int getAnswercnt() {
         return answercnt;
     }
 
-    public void setAnswercnt(Integer answercnt) {
+    public void setAnswercnt(int answercnt) {
         this.answercnt = answercnt;
     }
 

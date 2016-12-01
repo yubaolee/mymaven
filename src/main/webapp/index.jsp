@@ -16,6 +16,9 @@
 
                 <ul class="layui-nav">
                     <li class="layui-nav-item ">
+                        <a href="club/index">社区</a>
+                    </li>
+                    <li class="layui-nav-item ">
                         <a href="http://www.w3cschool.cn/openauthdotnet/e8931tly.html">文档</a>
                     </li>
                     <li class="layui-nav-item ">
@@ -50,7 +53,7 @@
                 <jsp:include page="/main/getversion"></jsp:include>
                 <div class="site-banner-other">
                     <script src='https://git.oschina.net/yubaolee/OpenAuth.Net/star_widget_preview'></script>
-                    </div>
+                </div>
             </div>
         </div>
 

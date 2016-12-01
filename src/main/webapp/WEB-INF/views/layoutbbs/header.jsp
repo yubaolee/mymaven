@@ -15,8 +15,6 @@
 
             <div class="nav-user">
                 <div id="view"></div>
-
-
             </div>
         </div>
     </div>
@@ -30,19 +28,19 @@
            <img src="../Resources/fly/images/avatar/{{= d.Result.pic}}">
             {{# } }}
             
-            <cite>{{# d.Result.name}}</cite>
+            <cite>{{= d.Result.name}}</cite>
             <i>{{# if(d.Result.viplevel>0){}}
             Vip{{= d.Result.viplevel}}
             {{# } }}</i>
         </a>
         <div class="nav">
-            <a href="user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
-            <a href="user/logout/"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+            <a href="#"><i class="iconfont icon-shezhi"></i>设置</a>
+            <a href="/user/logout"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
         </div>
         {{# }else{ }}
         <!-- 未登入状态 -->
         <a class="unlogin" href="user/login"><i class="iconfont icon-touxiang"></i></a>
-        <span><a href="user/login">登入</a><a href="user/reg">注册</a></span>
+        <span><a href="/user/login">登入</a><a href="/user/reg">注册</a></span>
         <p class="out-login">
             <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
             <a href="" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>

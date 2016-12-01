@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="../Resources/layui/css/layui.css">
         <link rel="stylesheet" href="../Resources/fly/css/global.css">
         <script src="../Resources/layui/layui.js"></script>
+        <script src="../Resources/jquery.js"></script>
 
     </head>
 
@@ -27,37 +28,43 @@
           <a href="#">未结帖</a>
           <a href="#">已采纳</a>
           <a href="#">精帖</a>
-          <a href="user/index.html">我的帖</a>
+          <a href="#">我的帖</a>
         </span>
                         <form action="http://cn.bing.com/search" class="fly-search">
                             <i class="iconfont icon-sousuo"></i>
                             <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
                         </form>
-                        <a href="jie/add.html" class="layui-btn jie-add">发布问题</a>
+                        <a href="#" class="layui-btn jie-add">发布问题</a>
                     </div>
 
 
                     <ul class="fly-list">
-                        <li class="fly-list-li">
-                            <a href="user/home.html" class="fly-list-avatar">
-                                <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
-                            </a>
-                            <h2 class="fly-tip">
-                                <a href="jie/detail.html">基于Layui的轻量级问答社区页面模版</a>
-                                <span class="fly-tip-stick">置顶</span>
-                                <span class="fly-tip-jing">精帖</span>
-                            </h2>
-                            <p>
-                                <span><a href="user/home.html">贤心</a></span>
-                                <span>刚刚</span>
-                                <span>layui框架综合</span>
-                                <span class="fly-list-hint">
-                          <i class="iconfont" title="回答">&#xe60c;</i> 317
-                          <i class="iconfont" title="人气">&#xe60b;</i> 6830
-                        </span>
-                            </p>
-                        </li>
-
+                        <script id="question" type="text/html">
+                            <ul>
+                                {{# layui.each(d.Result.objects, function(index, item){ }}
+                                <li class="fly-list-li">
+                                    <a href="#" class="fly-list-avatar">
+                                        <img src="../Resources/fly/images/avatar/default.png" alt="">
+                                    </a>
+                                    <h2 class="fly-tip">
+                                        <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a>
+                                        <span class="fly-tip-stick">置顶</span>
+                                        <span class="fly-tip-jing">精帖</span>
+                                    </h2>
+                                    <p>
+                                        <span><a href="#">{{ item.userid }}</a></span>
+                                        <span>{{item.createdtime}} </span>
+                                        <span>OpenAuth.Net框架综合</span>
+                                        <span class="fly-list-hint">
+                                            <i class="iconfont" title="回答">&#xe60c;</i> {{ item.reward }}
+                                            <i class="iconfont" title="人气">&#xe60b;</i> {{ item.supportcnt }}
+                                        </span>
+                                    </p>
+                                </li>
+                                {{# }); }} {{# if(d.Result.total === 0){ }} 无数据 {{# } }}
+                            </ul>
+                        </script>
+                        <div id="questions"></div>
                     </ul>
 
                 </div>
@@ -68,43 +75,43 @@
                 <h3 class="page-title">新注册用户</h3>
                 <div class="user-looklog leifeng-rank">
                     <span>
-        <a href="user/home.html">
-          <img src="../Resources/fly/images/avatar/default.png">
-          <cite>纸飞机</cite>
-          <i>159次回答</i>
-        </a>
-        <a href="user/home.html">
-          <img src="../Resources/fly/images/avatar/default.png">
-          <cite>纸飞机</cite>
-          <i>159次回答</i>
-        </a>
-        <a href="user/home.html">
-          <img src="../Resources/fly/images/avatar/default.png">
-          <cite>纸飞机</cite>
-          <i>159次回答</i>
-        </a>
-        <a href="user/home.html">
-          <img src="../Resources/fly/images/avatar/default.png">
-          <cite>纸飞机</cite>
-          <i>159次回答</i>
-        </a>
-
-      </span>
+                         <script id="user" type="text/html">
+                            <ul>
+                                {{# layui.each(d.Result.objects, function(index, item){ }}
+                                 <a href="user/home.html">
+                                <img src="../Resources/fly/images/avatar/{{ item.pic }}">
+                                <cite>{{ item.name }}</cite>
+                                <i>{{ item.answercnt }}次回答</i>
+                                </a>
+                                {{# }); }} {{# if(d.Result.total === 0){ }} 无数据 {{# } }}
+                            </ul>
+                        </script>
+                        <div id="users"></div>
+                  </span>
                 </div>
 
                 <h3 class="page-title">最近热帖</h3>
                 <ol class="fly-list-one">
-                    <li>
-                        <a href="jie/detail.html">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 6087</span>
-                    </li>
+                    <script id="hotquestion" type="text/html">
+                        <ul>
+                            {{# layui.each(d.Result.objects, function(index, item){ }}
+                            <li>
+                                <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a>
+                                <span><i class="iconfont">&#xe60b;</i> {{ item.supportcnt }}</span>
+                            </li>
+                            {{# }); }} {{# if(d.Result.total === 0){ }} 无数据 {{# } }}
+                        </ul>
+                    </script>
+                    <div id="hotquestions"></div>
+
+
                 </ol>
 
 
                 <div class="fly-link">
                     <span>友情链接：</span>
                     <a href="http://www.layui.com/" target="_blank">Layui</a>
-                    <a href="http://layim.layui.com/" target="_blank">LayIM</a>
+                    <a href="http://www.openauth.me/" target="_blank">openauth.me</a>
                     <a href="http://layer.layui.com/" target="_blank">layer</a>
                 </div>
 
@@ -114,6 +121,7 @@
 
         <jsp:include page="layoutbbs/footer.jsp"></jsp:include>
         <script src="../blljs/statistics.js"></script>
+        <script src="../blljs/clubindex.js"></script>
         <script>
             layui.cache.page = '';
             layui.cache.user = {

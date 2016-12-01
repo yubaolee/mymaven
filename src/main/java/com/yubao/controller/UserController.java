@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -39,21 +40,32 @@ public class UserController extends BaseController {
         return "reg";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletResponse out) {
+        Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER,"");
+        cookie.setMaxAge(-1);
+        out.addCookie(cookie);
+        return "clubindex";
+    }
+
     @ResponseBody
-    @RequestMapping(value = "/header", method = RequestMethod.GET)
-    public void header(HttpServletRequest request, HttpServletResponse out) throws IOException {
+    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
+    public void getUser(HttpServletRequest request, HttpServletResponse out) throws IOException {
         out.setContentType("text/html; charset=utf-8");
         response.Status = false;
+        response.Message ="";
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
 
                 if (cookie.getName().equals(Const.COOKIE_LOGIN_USER)) {
                     String id = cookie.getValue();
-                    User user = service.selectByPrimaryKey(id);
-                    response.Status = true;
-                    response.Result = user;
-                    break;
+                    if(id != null && !id.equals("")){
+                        User user = service.selectByPrimaryKey(id);
+                        response.Status = true;
+                        response.Result = user;
+                        break;
+                    }
                 }
             }
         }
@@ -71,6 +83,7 @@ public class UserController extends BaseController {
             user.setId(UUID.randomUUID().toString());
             user.setName(name);
             user.setAccount(account);
+            user.setPic(new Random(8).toString() +".jpg");
             user.setPwd(MD5.Encode(pwd));
             user.setCreatetime(new Date());
             service.insert(user);
@@ -94,6 +107,16 @@ public class UserController extends BaseController {
             response.Status = false;
             response.Message = e.getMessage();
         }
+        out.getWriter().print(gson.toJson(response));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getnew", method = RequestMethod.GET)
+    public void getnew(HttpServletResponse out, String key, int index, int size) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        response.Status = true;
+        response.Result = service.Get(key, index, size);
+
         out.getWriter().print(gson.toJson(response));
     }
 }

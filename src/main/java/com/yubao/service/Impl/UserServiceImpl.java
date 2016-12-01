@@ -1,7 +1,10 @@
 package com.yubao.service.Impl;
 
 import com.util.MD5;
+import com.util.temp.PageObject;
 import com.yubao.dao.UserMapper;
+import com.yubao.model.Question;
+import com.yubao.model.QuestionExample;
 import com.yubao.model.User;
 import com.yubao.model.UserExample;
 import com.yubao.service.UserService;
@@ -83,5 +86,31 @@ public class UserServiceImpl implements UserService {
 
     public int updateByPrimaryKey(User record) {
         return _mapper.updateByPrimaryKey(record);
+    }
+
+    public PageObject<User> Get(String key, int index, int size) {
+        if(index == 0) index = 1;
+        if(size ==0) size = 10;
+
+        UserExample exp = new UserExample();
+
+
+        if(key != null && !key.equals(""))
+        {
+            UserExample.Criteria criteria = exp.createCriteria();
+            criteria.andNameEqualTo(key);
+        }
+
+        PageObject<User> obj = new PageObject<User>();
+        obj.size = size;
+        obj.index = index;
+        obj.setTotal(_mapper.countByExample(exp));
+
+        int startindex = (index-1)*size;
+        exp.setOffset(startindex);
+        exp.setLimit(size);
+        obj.objects = _mapper.selectByExample(exp);
+
+        return obj;
     }
 }
