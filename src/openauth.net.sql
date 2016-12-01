@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2016-11-28 19:36:35
+Date: 2016-11-29 17:44:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,6 +48,7 @@ CREATE TABLE `sysconf` (
 -- Records of sysconf
 -- ----------------------------
 INSERT INTO `sysconf` VALUES ('8223baeb-a7e9-4932-a64b-d709300473e2', '2.0', 'version');
+INSERT INTO `sysconf` VALUES ('c0b07303-6e23-4f89-9570-d6aef0d7b92f', '4305', 'download');
 
 -- ----------------------------
 -- Table structure for updatelog
