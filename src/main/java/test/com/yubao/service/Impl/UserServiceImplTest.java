@@ -1,4 +1,4 @@
-package com.yubao.service;
+package test.com.yubao.service.Impl;
 
 import com.yubao.model.User;
 import com.yubao.service.UserService;

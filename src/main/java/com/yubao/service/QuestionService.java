@@ -8,4 +8,6 @@ import com.yubao.model.Question;
  */
 public interface QuestionService {
     PageObject<Question> Get(String key, int index, int size);
+
+    String add(Question question);
 }

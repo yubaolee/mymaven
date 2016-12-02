@@ -8,7 +8,9 @@ import com.yubao.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2016-12-01.
@@ -43,5 +45,13 @@ public class QuestionServiceImpl implements QuestionService {
         obj.objects = _mapper.selectByExample(exp);
 
         return obj;
+    }
+
+    public String add(Question question) {
+        String id = UUID.randomUUID().toString();
+        question.setCreatedtime(new Date());
+        question.setId(id);
+        _mapper.insertSelective(question);
+        return id;
     }
 }
