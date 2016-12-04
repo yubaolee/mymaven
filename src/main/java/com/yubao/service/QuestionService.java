@@ -9,5 +9,7 @@ import com.yubao.model.Question;
 public interface QuestionService {
     PageObject<Question> Get(String key, int index, int size);
 
-    String add(Question question);
+    String add(Question question) throws Exception;
+
+    Question Get(String id);
 }

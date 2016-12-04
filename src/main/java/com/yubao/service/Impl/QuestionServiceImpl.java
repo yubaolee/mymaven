@@ -4,6 +4,8 @@ import com.util.temp.PageObject;
 import com.yubao.dao.QuestionMapper;
 import com.yubao.model.Question;
 import com.yubao.model.QuestionExample;
+import com.yubao.model.User;
+import com.yubao.service.LoginService;
 import com.yubao.service.QuestionService;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Resource
     QuestionMapper _mapper;
+
+    @Resource
+    LoginService loginService;
 
     public PageObject<Question> Get(String key, int index, int size) {
         if(index == 0) index = 1;
@@ -47,11 +52,21 @@ public class QuestionServiceImpl implements QuestionService {
         return obj;
     }
 
-    public String add(Question question) {
+    public String add(Question question) throws Exception {
+        User user = loginService.get();
+        if(user == null){
+            throw new Exception("请先登录");
+        }
         String id = UUID.randomUUID().toString();
+        question.setUserid(user.getAccount());
         question.setCreatedtime(new Date());
         question.setId(id);
         _mapper.insertSelective(question);
         return id;
+    }
+
+    public Question Get(String id) {
+        Question q = _mapper.selectByPrimaryKey(id);
+        return q;
     }
 }

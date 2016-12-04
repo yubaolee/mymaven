@@ -4,6 +4,7 @@ import com.util.Const;
 import com.util.MD5;
 import com.util.Response;
 import com.yubao.model.User;
+import com.yubao.service.LoginService;
 import com.yubao.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,9 @@ public class UserController extends BaseController {
 
     @Resource
     UserService service;
+
+    @Resource
+    LoginService loginService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
@@ -49,20 +53,13 @@ public class UserController extends BaseController {
     public void getUser(HttpServletRequest request, HttpServletResponse out) throws IOException {
         out.setContentType("text/html; charset=utf-8");
         Response resp = new Response();
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-
-                if (cookie.getName().equals(Const.COOKIE_LOGIN_USER)) {
-                    String id = cookie.getValue();
-                    if(id != null && !id.equals("")){
-                        User user = service.selectByPrimaryKey(id);
-                        resp.Status = true;
-                        resp.Result = user;
-                        break;
-                    }
-                }
-            }
+        User user = loginService.get();
+        if(user == null){
+            resp.Status = false;
+            resp.Result = null;
+        }else{
+            resp.Status = true;
+            resp.Result = user;
         }
 
         out.getWriter().print(gson.toJson(resp));
@@ -94,7 +91,9 @@ public class UserController extends BaseController {
         out.setContentType("text/html; charset=utf-8");
         try {
             User u = service.check(account, pwd);
-            out.addCookie(new Cookie(Const.COOKIE_LOGIN_USER, u.getId()));
+            Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER, u.getId());
+            cookie.setMaxAge(3600);
+            out.addCookie(cookie);
             response.Status = true;
         } catch (Exception e) {
             response.Status = false;

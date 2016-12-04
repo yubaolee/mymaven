@@ -3,12 +3,12 @@
     <script src="../Resources/layui/layui.js"></script>
     <div class="header">
         <div class="main">
-            <a class="logo" href="/" title="OpenAuth.Net">OpenAuth.Net社区</a>
+            <a class="logo" href="/club/index" title="OpenAuth.Net">OpenAuth.Net社区</a>
             <div class="nav">
-                <a class="nav-this" href="#">
+                <a class="nav-this" href="/club/index">
                     <i class="iconfont icon-wenda"></i>问答
                 </a>
-                <a href="http://www.openauth.me/" target="_blank">
+                <a href="/" target="_blank">
                     <i class="iconfont icon-ui"></i>框架
                 </a>
             </div>

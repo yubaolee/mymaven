@@ -34,7 +34,7 @@
                             <i class="iconfont icon-sousuo"></i>
                             <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
                         </form>
-                        <a href="#" class="layui-btn jie-add">发布问题</a>
+                        <a href="/questions/add" class="layui-btn jie-add">发布问题</a>
                     </div>
 
 
