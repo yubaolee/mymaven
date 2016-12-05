@@ -4,13 +4,16 @@ import com.util.temp.PageObject;
 import com.util.temp.QuestionViewModel;
 import com.yubao.model.Question;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016-12-01.
  */
 public interface QuestionService {
-    PageObject<Question> Get(String key, int index, int size);
+
+    PageObject<QuestionViewModel> Get(String key, int index, int size);
 
     String add(Question question) throws Exception;
 
-    Question Get(String id);
+    QuestionViewModel Get(String id);
 }

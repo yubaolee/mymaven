@@ -1,13 +1,19 @@
 package com.yubao.dao;
 
+import com.util.temp.AnswerViewModel;
+import com.util.temp.QuestionViewModel;
 import com.yubao.model.Answer;
 import com.yubao.model.AnswerExample;
 import java.util.List;
+
+import com.yubao.model.QuestionExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnswerMapper {
+    List<AnswerViewModel> getAnswerVMs(String questionid);
+
     int countByExample(AnswerExample example);
 
     int deleteByExample(AnswerExample example);

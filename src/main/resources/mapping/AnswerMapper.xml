@@ -73,6 +73,31 @@
   <sql id="Base_Column_List" >
     Id, Content, SupportCnt, OpposeCnt, AnswerTo, time, UserId, accept, praise
   </sql>
+
+
+  <resultMap type="com.util.temp.AnswerViewModel" id="answervmmapper">
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="Content" property="content" jdbcType="VARCHAR" />
+    <result column="SupportCnt" property="supportcnt" jdbcType="INTEGER" />
+    <result column="OpposeCnt" property="opposecnt" jdbcType="INTEGER" />
+    <result column="AnswerTo" property="answerto" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="UserId" property="userid" jdbcType="VARCHAR" />
+    <result column="accept" property="accept" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <association property="user" column="UserId" javaType="com.util.temp.UserViewModel">
+      <id column="UserId" property="id" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="rmb" property="rmb" jdbcType="INTEGER" />
+      <result column="pic" property="pic" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+
+  <select id="getAnswerVMs" resultMap="answervmmapper" parameterType="String" >
+    SELECT a.*,u.`name`,u.rmb,u.pic from answer as a LEFT JOIN `user` as u on a.UserId=u.id where a.AnswerTo=#{questionid}
+  </select>
+
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yubao.model.AnswerExample" >
     select
     <if test="distinct" >

@@ -2,7 +2,9 @@ package com.yubao.service.Impl;
 
 import com.util.temp.PageObject;
 import com.util.temp.QuestionViewModel;
+import com.yubao.dao.AnswerMapper;
 import com.yubao.dao.QuestionMapper;
+import com.yubao.dao.UserMapper;
 import com.yubao.model.Question;
 import com.yubao.model.QuestionExample;
 import com.yubao.model.User;
@@ -28,7 +30,12 @@ public class QuestionServiceImpl implements QuestionService {
     @Resource
     LoginService loginService;
 
-    public PageObject<Question> Get(String key, int index, int size) {
+    @Resource
+    AnswerMapper _answerMapper;
+    @Resource
+    UserMapper _userMapper;
+
+    public PageObject<QuestionViewModel> Get(String key, int index, int size) {
         if(index == 0) index = 1;
         if(size ==0) size = 10;
 
@@ -41,7 +48,7 @@ public class QuestionServiceImpl implements QuestionService {
             criteria.andTitleLike(key);
         }
 
-        PageObject<Question> obj = new PageObject<Question>();
+        PageObject<QuestionViewModel> obj = new PageObject<QuestionViewModel>();
         obj.size = size;
         obj.index = index;
         obj.setTotal(_mapper.countByExample(exp));
@@ -51,7 +58,7 @@ public class QuestionServiceImpl implements QuestionService {
         exp.setLimit(size);
 
 
-        obj.objects =_mapper.selectByExample(exp);;
+        obj.objects =_mapper.getQuestionVMs(exp);
 
         return obj;
     }
@@ -69,8 +76,9 @@ public class QuestionServiceImpl implements QuestionService {
         return id;
     }
 
-    public Question Get(String id) {
-        Question q = _mapper.selectByPrimaryKey(id);
+    public QuestionViewModel Get(String id) {
+        QuestionViewModel q = _mapper.getQuestionVM(id);
+        q.answers = _answerMapper.getAnswerVMs(q.getId());
         return q;
     }
 }

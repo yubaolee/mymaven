@@ -79,6 +79,53 @@
     Id, title, Content, SupportCnt, OpposeCnt, CommentTo, time, UserId, hits, stick, 
     comment, status, experience, accept
   </sql>
+
+  <resultMap type="com.util.temp.QuestionViewModel" id="questionvmmapper">
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="Content" property="content" jdbcType="VARCHAR" />
+    <result column="SupportCnt" property="supportcnt" jdbcType="INTEGER" />
+    <result column="OpposeCnt" property="opposecnt" jdbcType="INTEGER" />
+    <result column="CommentTo" property="commentto" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="stick" property="stick" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="experience" property="experience" jdbcType="INTEGER" />
+    <result column="accept" property="accept" jdbcType="VARCHAR" />
+    <association property="user" column="UserId" javaType="com.util.temp.UserViewModel">
+      <id column="UserId" property="id" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="rmb" property="rmb" jdbcType="INTEGER" />
+      <result column="pic" property="pic" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+
+  <select id="getQuestionVM" resultMap="questionvmmapper" parameterType="String" >
+    SELECT q.*,u.`name`,u.rmb,u.pic from question as q LEFT JOIN `user` as u on q.UserId=u.id where q.id=#{id}
+  </select>
+
+
+  <select id="getQuestionVMs" resultMap="questionvmmapper" parameterType="com.yubao.model.QuestionExample" >
+    SELECT q.*,u.`name`,u.rmb,u.pic from question as q LEFT JOIN `user` as u on q.UserId=u.id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null" >
+      <if test="offset != null" >
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null" >
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yubao.model.QuestionExample" >
     select
     <if test="distinct" >

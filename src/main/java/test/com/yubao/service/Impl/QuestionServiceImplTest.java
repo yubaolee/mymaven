@@ -1,5 +1,7 @@
 package test.com.yubao.service.Impl; 
 
+import com.util.temp.PageObject;
+import com.util.temp.QuestionViewModel;
 import com.yubao.model.Question;
 import com.yubao.service.QuestionService;
 import org.junit.Test;
@@ -8,9 +10,11 @@ import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /** 
@@ -21,6 +25,7 @@ import java.util.UUID;
 * @version 1.0 
 */
 @RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 /** 注入相关的配置文件：可以写入多个配置文件 **/
 @ContextConfiguration(locations={"classpath:spring-mybatis.xml"
 })
@@ -42,7 +47,8 @@ public void after() throws Exception {
 * 
 */ 
 @Test
-public void testGet() throws Exception { 
+public void testGet() throws Exception {
+   QuestionViewModel vm = service.Get("cb19e855-ec72-4be2-a6e4-60b9c59189d6");
 //TODO: Test goes here... 
 } 
 

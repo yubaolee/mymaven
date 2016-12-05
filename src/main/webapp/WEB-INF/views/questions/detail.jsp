@@ -18,7 +18,7 @@
         <jsp:include page="../layoutbbs/header.jsp"></jsp:include>
 
         <script id="detail" type="text/html">
-            {{# var rows=d.rows;}} {{# if(rows){ var myself = rows.uid === user.id; }}
+            {{# var rows = d.rows; }} {{# var user ={ id:'d8c8a352-452f-45ea-b699-4dc566885694', auth:1 }; }} {{# if(rows){ var myself = rows.user.id === user.id; }}
             <div class="main layui-clear">
                 <div class="wrap">
                     <div class="content detail">
@@ -62,17 +62,10 @@
                         <div class="detail-body photos" style="margin-bottom: 20px;">
                             {{ d.content(rows.content) }}
 
-                            <!-- layer-728*90 -->
-                            <div class="fly-ad" style="margin-top: 30px; height:90px; overflow: hidden;">
-                                <script type="text/javascript">
-                                    /*728*90*/
-                                    var cpro_id = "u2482674";
-                                </script>
-                                <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
-                            </div>
+
                         </div>
 
-                        {{# var jieda = rows.jieda; }}
+                        {{# var jieda = rows.answers; }}
 
                         <a name="comment"></a>
                         <h2 class="page-title">热忱回答<span>{{rows.comment > 0 ? ('（<em id="jiedaCount">'+rows.comment+'</em>）') : ''}}</span></h2>
@@ -200,7 +193,7 @@
                 var laytpl = layui.laytpl;
 
                 $.get("/questions/getone", { //问题详情
-                    id: 'f1213640-9c92-4aa8-8cfb-641f4855b63c'
+                    id: 'cb19e855-ec72-4be2-a6e4-60b9c59189d6'
                 }, function(data) {
                     var obj = JSON.parse(data);
                     var getTpl = $("#detail").html();
@@ -216,16 +209,16 @@
                 //     othis.html(fly.content(html));
                 // });
 
-                $.get("/questions/get", { //热贴
-                    index: 1,
-                    size: 8
-                }, function(data) {
-                    var obj = JSON.parse(data);
-                    var getTpl = $("#hotquestion").html();
-                    laytpl(getTpl).render(obj, function(html) {
-                        $("#hotquestions").html(html);
-                    });
-                });
+                // $.get("/questions/get", { //热贴
+                //     index: 1,
+                //     size: 8
+                // }, function(data) {
+                //     var obj = JSON.parse(data);
+                //     var getTpl = $("#hotquestion").html();
+                //     laytpl(getTpl).render(obj, function(html) {
+                //         $("#hotquestions").html(html);
+                //     });
+                // });
             });
         </script>
 
