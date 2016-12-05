@@ -1,5 +1,9 @@
 package com.yubao.model;
 
+import com.agapple.mapping.BeanMapping;
+import com.util.temp.QuestionWithAnswers;
+import com.util.temp.UserViewModel;
+
 import java.util.Date;
 
 public class Question {
@@ -13,13 +17,44 @@ public class Question {
 
     private int opposecnt;
 
-    private int reward;
+    private String commentto;
 
-    private Date createdtime;
-
-    private int state;
+    /**
+    * 创建时间
+    */
+    private Date time;
 
     private String userid;
+
+    /**
+    * 浏览量
+    */
+    private int hits;
+
+    /**
+    * 置顶
+    */
+    private int stick;
+
+    /**
+    * 回答数
+    */
+    private int comment;
+
+    /**
+    * 加精
+    */
+    private int status;
+
+    /**
+    * 悬赏
+    */
+    private int experience;
+
+    /**
+    * 采纳
+    */
+    private String accept;
 
     public String getId() {
         return id;
@@ -61,28 +96,20 @@ public class Question {
         this.opposecnt = opposecnt;
     }
 
-    public int getReward() {
-        return reward;
+    public String getCommentto() {
+        return commentto;
     }
 
-    public void setReward(int reward) {
-        this.reward = reward;
+    public void setCommentto(String commentto) {
+        this.commentto = commentto;
     }
 
-    public Date getCreatedtime() {
-        return createdtime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getUserid() {
@@ -92,4 +119,59 @@ public class Question {
     public void setUserid(String userid) {
         this.userid = userid;
     }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
+
+    public int getStick() {
+        return stick;
+    }
+
+    public void setStick(int stick) {
+        this.stick = stick;
+    }
+
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public String getAccept() {
+        return accept;
+    }
+
+    public void setAccept(String accept) {
+        this.accept = accept;
+    }
+
+//    public QuestionWithAnswers ToViewModel(){
+//        QuestionWithAnswers vm = new QuestionWithAnswers();
+//        BeanMapping mapping = BeanMapping.create(Question.class, QuestionWithAnswers.class);
+//        mapping.mapping(this, vm);
+//        return vm;
+//    }
 }

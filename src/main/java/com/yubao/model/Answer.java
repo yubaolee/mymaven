@@ -1,5 +1,9 @@
 package com.yubao.model;
 
+import com.agapple.mapping.BeanMapping;
+import com.util.temp.AnswerViewModel;
+import com.util.temp.QuestionWithAnswers;
+
 import java.util.Date;
 
 public class Answer {
@@ -13,11 +17,16 @@ public class Answer {
 
     private String answerto;
 
-    private Date createdtime;
+    private Date time;
 
     private String userid;
 
-    private int state;
+    /**
+    * 是否采纳
+    */
+    private int accept;
+
+    private int praise;
 
     public String getId() {
         return id;
@@ -59,12 +68,12 @@ public class Answer {
         this.answerto = answerto;
     }
 
-    public Date getCreatedtime() {
-        return createdtime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setCreatedtime(Date createdtime) {
-        this.createdtime = createdtime;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getUserid() {
@@ -75,11 +84,26 @@ public class Answer {
         this.userid = userid;
     }
 
-    public int getState() {
-        return state;
+    public int getAccept() {
+        return accept;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setAccept(int accept) {
+        this.accept = accept;
     }
+
+    public int getPraise() {
+        return praise;
+    }
+
+    public void setPraise(int praise) {
+        this.praise = praise;
+    }
+
+//    public AnswerViewModel ToViewModel(){
+//        AnswerViewModel vm = new AnswerViewModel();
+//        BeanMapping mapping = BeanMapping.create(Answer.class, AnswerViewModel.class);
+//        mapping.mapping(this, vm);
+//        return vm;
+//    }
 }

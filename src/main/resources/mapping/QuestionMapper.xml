@@ -3,14 +3,19 @@
 <mapper namespace="com.yubao.dao.QuestionMapper" >
   <resultMap id="BaseResultMap" type="com.yubao.model.Question" >
     <id column="Id" property="id" jdbcType="VARCHAR" />
-    <result column="Title" property="title" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="Content" property="content" jdbcType="VARCHAR" />
     <result column="SupportCnt" property="supportcnt" jdbcType="INTEGER" />
     <result column="OpposeCnt" property="opposecnt" jdbcType="INTEGER" />
-    <result column="Reward" property="reward" jdbcType="INTEGER" />
-    <result column="CreatedTime" property="createdtime" jdbcType="TIMESTAMP" />
-    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="CommentTo" property="commentto" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
     <result column="UserId" property="userid" jdbcType="VARCHAR" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="stick" property="stick" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="experience" property="experience" jdbcType="INTEGER" />
+    <result column="accept" property="accept" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Id, Title, Content, SupportCnt, OpposeCnt, Reward, CreatedTime, State, UserId
+    Id, title, Content, SupportCnt, OpposeCnt, CommentTo, time, UserId, hits, stick, 
+    comment, status, experience, accept
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yubao.model.QuestionExample" >
     select
@@ -112,14 +118,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.yubao.model.Question" >
-    insert into question (Id, Title, Content, 
-      SupportCnt, OpposeCnt, Reward, 
-      CreatedTime, State, UserId
-      )
+    insert into question (Id, title, Content, 
+      SupportCnt, OpposeCnt, CommentTo, 
+      time, UserId, hits, 
+      stick, comment, status, 
+      experience, accept)
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{supportcnt,jdbcType=INTEGER}, #{opposecnt,jdbcType=INTEGER}, #{reward,jdbcType=INTEGER}, 
-      #{createdtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}
-      )
+      #{supportcnt,jdbcType=INTEGER}, #{opposecnt,jdbcType=INTEGER}, #{commentto,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{userid,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, 
+      #{stick,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{experience,jdbcType=INTEGER}, #{accept,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yubao.model.Question" >
     insert into question
@@ -128,7 +136,7 @@
         Id,
       </if>
       <if test="title != null" >
-        Title,
+        title,
       </if>
       <if test="content != null" >
         Content,
@@ -139,17 +147,32 @@
       <if test="opposecnt != null" >
         OpposeCnt,
       </if>
-      <if test="reward != null" >
-        Reward,
+      <if test="commentto != null" >
+        CommentTo,
       </if>
-      <if test="createdtime != null" >
-        CreatedTime,
-      </if>
-      <if test="state != null" >
-        State,
+      <if test="time != null" >
+        time,
       </if>
       <if test="userid != null" >
         UserId,
+      </if>
+      <if test="hits != null" >
+        hits,
+      </if>
+      <if test="stick != null" >
+        stick,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="accept != null" >
+        accept,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -168,17 +191,32 @@
       <if test="opposecnt != null" >
         #{opposecnt,jdbcType=INTEGER},
       </if>
-      <if test="reward != null" >
-        #{reward,jdbcType=INTEGER},
+      <if test="commentto != null" >
+        #{commentto,jdbcType=VARCHAR},
       </if>
-      <if test="createdtime != null" >
-        #{createdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=INTEGER},
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="userid != null" >
         #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null" >
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="stick != null" >
+        #{stick,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="accept != null" >
+        #{accept,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -195,7 +233,7 @@
         Id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.title != null" >
-        Title = #{record.title,jdbcType=VARCHAR},
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null" >
         Content = #{record.content,jdbcType=VARCHAR},
@@ -206,17 +244,32 @@
       <if test="record.opposecnt != null" >
         OpposeCnt = #{record.opposecnt,jdbcType=INTEGER},
       </if>
-      <if test="record.reward != null" >
-        Reward = #{record.reward,jdbcType=INTEGER},
+      <if test="record.commentto != null" >
+        CommentTo = #{record.commentto,jdbcType=VARCHAR},
       </if>
-      <if test="record.createdtime != null" >
-        CreatedTime = #{record.createdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.state != null" >
-        State = #{record.state,jdbcType=INTEGER},
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
       <if test="record.userid != null" >
         UserId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hits != null" >
+        hits = #{record.hits,jdbcType=INTEGER},
+      </if>
+      <if test="record.stick != null" >
+        stick = #{record.stick,jdbcType=INTEGER},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.experience != null" >
+        experience = #{record.experience,jdbcType=INTEGER},
+      </if>
+      <if test="record.accept != null" >
+        accept = #{record.accept,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -226,14 +279,19 @@
   <update id="updateByExample" parameterType="map" >
     update question
     set Id = #{record.id,jdbcType=VARCHAR},
-      Title = #{record.title,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
       Content = #{record.content,jdbcType=VARCHAR},
       SupportCnt = #{record.supportcnt,jdbcType=INTEGER},
       OpposeCnt = #{record.opposecnt,jdbcType=INTEGER},
-      Reward = #{record.reward,jdbcType=INTEGER},
-      CreatedTime = #{record.createdtime,jdbcType=TIMESTAMP},
-      State = #{record.state,jdbcType=INTEGER},
-      UserId = #{record.userid,jdbcType=VARCHAR}
+      CommentTo = #{record.commentto,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      UserId = #{record.userid,jdbcType=VARCHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      stick = #{record.stick,jdbcType=INTEGER},
+      comment = #{record.comment,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      experience = #{record.experience,jdbcType=INTEGER},
+      accept = #{record.accept,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,7 +300,7 @@
     update question
     <set >
       <if test="title != null" >
-        Title = #{title,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         Content = #{content,jdbcType=VARCHAR},
@@ -253,31 +311,51 @@
       <if test="opposecnt != null" >
         OpposeCnt = #{opposecnt,jdbcType=INTEGER},
       </if>
-      <if test="reward != null" >
-        Reward = #{reward,jdbcType=INTEGER},
+      <if test="commentto != null" >
+        CommentTo = #{commentto,jdbcType=VARCHAR},
       </if>
-      <if test="createdtime != null" >
-        CreatedTime = #{createdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="state != null" >
-        State = #{state,jdbcType=INTEGER},
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="userid != null" >
         UserId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null" >
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="stick != null" >
+        stick = #{stick,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="accept != null" >
+        accept = #{accept,jdbcType=VARCHAR},
       </if>
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yubao.model.Question" >
     update question
-    set Title = #{title,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       Content = #{content,jdbcType=VARCHAR},
       SupportCnt = #{supportcnt,jdbcType=INTEGER},
       OpposeCnt = #{opposecnt,jdbcType=INTEGER},
-      Reward = #{reward,jdbcType=INTEGER},
-      CreatedTime = #{createdtime,jdbcType=TIMESTAMP},
-      State = #{state,jdbcType=INTEGER},
-      UserId = #{userid,jdbcType=VARCHAR}
+      CommentTo = #{commentto,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      UserId = #{userid,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      stick = #{stick,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      experience = #{experience,jdbcType=INTEGER},
+      accept = #{accept,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

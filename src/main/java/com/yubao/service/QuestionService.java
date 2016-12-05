@@ -1,6 +1,7 @@
 package com.yubao.service;
 
 import com.util.temp.PageObject;
+import com.util.temp.QuestionViewModel;
 import com.yubao.model.Question;
 
 /**

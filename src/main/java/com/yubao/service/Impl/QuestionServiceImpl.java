@@ -1,6 +1,7 @@
 package com.yubao.service.Impl;
 
 import com.util.temp.PageObject;
+import com.util.temp.QuestionViewModel;
 import com.yubao.dao.QuestionMapper;
 import com.yubao.model.Question;
 import com.yubao.model.QuestionExample;
@@ -10,6 +11,7 @@ import com.yubao.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +49,9 @@ public class QuestionServiceImpl implements QuestionService {
         int startindex = (index-1)*size;
         exp.setOffset(startindex);
         exp.setLimit(size);
-        obj.objects = _mapper.selectByExample(exp);
+
+
+        obj.objects =_mapper.selectByExample(exp);;
 
         return obj;
     }
@@ -58,8 +62,8 @@ public class QuestionServiceImpl implements QuestionService {
             throw new Exception("请先登录");
         }
         String id = UUID.randomUUID().toString();
-        question.setUserid(user.getAccount());
-        question.setCreatedtime(new Date());
+        question.setUserid(user.getId());
+        question.setTime(new Date());
         question.setId(id);
         _mapper.insertSelective(question);
         return id;

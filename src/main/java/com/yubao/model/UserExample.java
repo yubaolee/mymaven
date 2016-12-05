@@ -405,63 +405,63 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andViplevelIsNull() {
-            addCriterion("viplevel is null");
+        public Criteria andRmbIsNull() {
+            addCriterion("rmb is null");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelIsNotNull() {
-            addCriterion("viplevel is not null");
+        public Criteria andRmbIsNotNull() {
+            addCriterion("rmb is not null");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelEqualTo(Integer value) {
-            addCriterion("viplevel =", value, "viplevel");
+        public Criteria andRmbEqualTo(Integer value) {
+            addCriterion("rmb =", value, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelNotEqualTo(Integer value) {
-            addCriterion("viplevel <>", value, "viplevel");
+        public Criteria andRmbNotEqualTo(Integer value) {
+            addCriterion("rmb <>", value, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelGreaterThan(Integer value) {
-            addCriterion("viplevel >", value, "viplevel");
+        public Criteria andRmbGreaterThan(Integer value) {
+            addCriterion("rmb >", value, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("viplevel >=", value, "viplevel");
+        public Criteria andRmbGreaterThanOrEqualTo(Integer value) {
+            addCriterion("rmb >=", value, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelLessThan(Integer value) {
-            addCriterion("viplevel <", value, "viplevel");
+        public Criteria andRmbLessThan(Integer value) {
+            addCriterion("rmb <", value, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelLessThanOrEqualTo(Integer value) {
-            addCriterion("viplevel <=", value, "viplevel");
+        public Criteria andRmbLessThanOrEqualTo(Integer value) {
+            addCriterion("rmb <=", value, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelIn(List<Integer> values) {
-            addCriterion("viplevel in", values, "viplevel");
+        public Criteria andRmbIn(List<Integer> values) {
+            addCriterion("rmb in", values, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelNotIn(List<Integer> values) {
-            addCriterion("viplevel not in", values, "viplevel");
+        public Criteria andRmbNotIn(List<Integer> values) {
+            addCriterion("rmb not in", values, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelBetween(Integer value1, Integer value2) {
-            addCriterion("viplevel between", value1, value2, "viplevel");
+        public Criteria andRmbBetween(Integer value1, Integer value2) {
+            addCriterion("rmb between", value1, value2, "rmb");
             return (Criteria) this;
         }
 
-        public Criteria andViplevelNotBetween(Integer value1, Integer value2) {
-            addCriterion("viplevel not between", value1, value2, "viplevel");
+        public Criteria andRmbNotBetween(Integer value1, Integer value2) {
+            addCriterion("rmb not between", value1, value2, "rmb");
             return (Criteria) this;
         }
 
@@ -912,6 +912,126 @@ public class UserExample {
 
         public Criteria andPicNotBetween(String value1, String value2) {
             addCriterion("pic not between", value1, value2, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIsNull() {
+            addCriterion("auth is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIsNotNull() {
+            addCriterion("auth is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthEqualTo(Integer value) {
+            addCriterion("auth =", value, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthNotEqualTo(Integer value) {
+            addCriterion("auth <>", value, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthGreaterThan(Integer value) {
+            addCriterion("auth >", value, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("auth >=", value, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthLessThan(Integer value) {
+            addCriterion("auth <", value, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthLessThanOrEqualTo(Integer value) {
+            addCriterion("auth <=", value, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIn(List<Integer> values) {
+            addCriterion("auth in", values, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthNotIn(List<Integer> values) {
+            addCriterion("auth not in", values, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthBetween(Integer value1, Integer value2) {
+            addCriterion("auth between", value1, value2, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthNotBetween(Integer value1, Integer value2) {
+            addCriterion("auth not between", value1, value2, "auth");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceIsNull() {
+            addCriterion("experience is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceIsNotNull() {
+            addCriterion("experience is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceEqualTo(Integer value) {
+            addCriterion("experience =", value, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceNotEqualTo(Integer value) {
+            addCriterion("experience <>", value, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceGreaterThan(Integer value) {
+            addCriterion("experience >", value, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("experience >=", value, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceLessThan(Integer value) {
+            addCriterion("experience <", value, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceLessThanOrEqualTo(Integer value) {
+            addCriterion("experience <=", value, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceIn(List<Integer> values) {
+            addCriterion("experience in", values, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceNotIn(List<Integer> values) {
+            addCriterion("experience not in", values, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceBetween(Integer value1, Integer value2) {
+            addCriterion("experience between", value1, value2, "experience");
+            return (Criteria) this;
+        }
+
+        public Criteria andExperienceNotBetween(Integer value1, Integer value2) {
+            addCriterion("experience not between", value1, value2, "experience");
             return (Criteria) this;
         }
     }

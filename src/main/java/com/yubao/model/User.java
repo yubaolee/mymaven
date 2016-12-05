@@ -1,5 +1,8 @@
 package com.yubao.model;
 
+import com.agapple.mapping.BeanMapping;
+import com.util.temp.UserViewModel;
+
 import java.util.Date;
 
 public class User {
@@ -11,7 +14,10 @@ public class User {
 
     private String pwd;
 
-    private int viplevel;
+    /**
+    * VIP等级
+    */
+    private Integer rmb;
 
     private Date createtime;
 
@@ -21,11 +27,21 @@ public class User {
 
     private String qqopenid;
 
-    private int questioncnt;
+    private Integer questioncnt;
 
-    private int answercnt;
+    private Integer answercnt;
 
     private String pic;
+
+    /**
+    * 用户权限
+    */
+    private Integer auth;
+
+    /**
+    * 经验值
+    */
+    private Integer experience;
 
     public String getId() {
         return id;
@@ -59,12 +75,12 @@ public class User {
         this.pwd = pwd;
     }
 
-    public int getViplevel() {
-        return viplevel;
+    public Integer getRmb() {
+        return rmb;
     }
 
-    public void setViplevel(int viplevel) {
-        this.viplevel = viplevel;
+    public void setRmb(Integer rmb) {
+        this.rmb = rmb;
     }
 
     public Date getCreatetime() {
@@ -99,19 +115,19 @@ public class User {
         this.qqopenid = qqopenid;
     }
 
-    public int getQuestioncnt() {
+    public Integer getQuestioncnt() {
         return questioncnt;
     }
 
-    public void setQuestioncnt(int questioncnt) {
+    public void setQuestioncnt(Integer questioncnt) {
         this.questioncnt = questioncnt;
     }
 
-    public int getAnswercnt() {
+    public Integer getAnswercnt() {
         return answercnt;
     }
 
-    public void setAnswercnt(int answercnt) {
+    public void setAnswercnt(Integer answercnt) {
         this.answercnt = answercnt;
     }
 
@@ -122,4 +138,27 @@ public class User {
     public void setPic(String pic) {
         this.pic = pic;
     }
+
+    public Integer getAuth() {
+        return auth;
+    }
+
+    public void setAuth(Integer auth) {
+        this.auth = auth;
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
+    }
+
+//    public UserViewModel ToViewModel(){
+//        UserViewModel vm = new UserViewModel();
+//        BeanMapping mapping = BeanMapping.create(User.class, UserViewModel.class);
+//        mapping.mapping(this, vm);
+//        return vm;
+//    }
 }

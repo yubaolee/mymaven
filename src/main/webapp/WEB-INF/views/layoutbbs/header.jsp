@@ -29,8 +29,8 @@
             {{# } }}
             
             <cite>{{= d.Result.name}}</cite>
-            <i>{{# if(d.Result.viplevel>0){}}
-            Vip{{= d.Result.viplevel}}
+            <i>{{# if(d.Result.rmb>0){}}
+            Vip{{= d.Result.rmb}}
             {{# } }}</i>
         </a>
         <div class="nav">

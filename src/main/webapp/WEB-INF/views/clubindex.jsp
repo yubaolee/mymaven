@@ -47,17 +47,15 @@
                                         <img src="../Resources/fly/images/avatar/default.png" alt="">
                                     </a>
                                     <h2 class="fly-tip">
-                                        <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a>
-                                        <span class="fly-tip-stick">置顶</span>
-                                        <span class="fly-tip-jing">精帖</span>
+                                        <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a> {{ item.stick > 0 ? '<span class="fly-tip-stick">置顶</span>' :'' }} {{ item.status == 1 ? '<span class="fly-tip-jing">精帖</span>' : ''}}
                                     </h2>
                                     <p>
                                         <span><a href="#">{{ item.userid }}</a></span>
-                                        <span>{{item.createdtime}} </span>
+                                        <span>{{item.time}} </span>
                                         <span>OpenAuth.Net框架综合</span>
                                         <span class="fly-list-hint">
-                                            <i class="iconfont" title="回答">&#xe60c;</i> {{ item.reward }}
-                                            <i class="iconfont" title="人气">&#xe60b;</i> {{ item.supportcnt }}
+                                            <i class="iconfont" title="回答">&#xe60c;</i> {{ item.comment }}
+                                            <i class="iconfont" title="人气">&#xe60b;</i> {{ item.hits }}
                                         </span>
                                     </p>
                                 </li>
@@ -97,7 +95,7 @@
                             {{# layui.each(d.Result.objects, function(index, item){ }}
                             <li>
                                 <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a>
-                                <span><i class="iconfont">&#xe60b;</i> {{ item.supportcnt }}</span>
+                                <span><i class="iconfont">&#xe60b;</i> {{ item.hits }}</span>
                             </li>
                             {{# }); }} {{# if(d.Result.total === 0){ }} 无数据 {{# } }}
                         </ul>

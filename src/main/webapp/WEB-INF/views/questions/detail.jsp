@@ -16,222 +16,168 @@
     <body>
 
         <jsp:include page="../layoutbbs/header.jsp"></jsp:include>
-        <div class="main layui-clear">
-            <div class="wrap">
-                <div class="content detail">
-                    <h1>基于Layui的轻量级问答社区页面模版</h1>
-                    <div class="fly-tip fly-detail-hint" data-id="{{rows.id}}">
-                        <span class="fly-tip-stick">置顶帖</span>
-                        <span class="fly-tip-jing">精帖</span>
 
-                        <span>未结贴</span>
-                        <!-- <span class="fly-tip-jie">已采纳</span> -->
+        <script id="detail" type="text/html">
+            {{# var rows=d.rows;}} {{# if(rows){ var myself = rows.uid === user.id; }}
+            <div class="main layui-clear">
+                <div class="wrap">
+                    <div class="content detail">
+                        <h1>{{=rows.title}}</h1>
+                        <div class="fly-tip fly-detail-hint" data-id="{{rows.id}}">
 
-                        <!-- <span class="jie-admin" type="del" style="margin-left: 20px;">删除</span>
-        <span class="jie-admin" type="set" field="stick" rank="1">置顶</span> 
-        <span class="jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span>
-        <span class="jie-admin" type="set" field="status" rank="1">加精</span> 
-        <span class="jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
+                            {{ rows.stick > 0 ? '<span class="fly-tip-stick">置顶帖</span>' :'' }} {{ rows.status == 1 ? '<span class="fly-tip-jing">精帖</span>' : ''}} {{# if(rows.accept === -1){ }}
+                            <span>未结贴</span> {{# } else if(rows.accept >= 0 ){ }}
+                            <span class="fly-tip-jie">已采纳</span> {{# } }} {{# if(user.auth == 1){ }}
+                            <span class="jie-admin" type="del" style="margin-left: 20px;">删除</span> {{# } }} {{# if(user.auth == 1 || user.auth == 2){ }} {{# if(rows.stick > 0){ }}
+                            <span class="jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> {{# } else { }}
+                            <span class="jie-admin" type="set" field="stick" rank="1">置顶</span> {{# }; if(rows.status == 1){ }}
+                            <span class="jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> {{# } else { }}
+                            <span class="jie-admin" type="set" field="status" rank="1">加精</span> {{# }; } }}
 
-                        <div class="fly-list-hint">
-                            <i class="iconfont" title="回答">&#xe60c;</i> 517
-                            <i class="iconfont" title="人气">&#xe60b;</i> 98032
+                            <div class="fly-list-hint">
+                                <i class="iconfont" title="回答">&#xe60c;</i> {{rows.comment}}
+                                <i class="iconfont" title="人气">&#xe60b;</i> {{rows.hits}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="detail-about">
-                        <a class="jie-user" href="">
-                            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
-                            <cite>
-            贤心
-            <em>1分钟前发布</em>
+                        <div class="detail-about">
+                            <a class="jie-user" href="/u/{{168*rows.uid}}/">
+                                <img src="{{rows.user.avatar}}" alt="{{rows.user.username}}">
+                                <cite>
+            {{rows.user.username}}
+            {{# if(rows.user.rmb){ }}
+            <em style="padding:0 5px; color: #FF7200;">VIP{{ lay.util.vip(rows.user.rmb) }}</em>
+            {{# } }}
+            <em>发布于{{lay.time(rows.time, true)}}</em>
+            {{# }}
           </cite>
-                        </a>
-                        <div class="detail-hits" data-id="{{rows.id}}">
-                            <span style="color:#FF7200">悬赏：20飞吻</span>
-                            <span class="jie-admin" type="edit"><a href="/jie/edit/{{rows.id}}">编辑此贴</a></span>
+                            </a>
+                            <div class="detail-hits" data-id="{{rows.id}}">
+
+                                <span style="color:#FF7200">悬赏：{{rows.experience}}飞吻</span> {{# if((user.username && myself && rows.accept == -1) || user.auth == 1){ }}
+                                <span class="jie-admin" type="edit"><a href="/jie/edit/{{rows.id}}">编辑此贴</a></span> {{# } }}
+
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="detail-body photos" style="margin-bottom: 20px;">
-                        <p>
-                            该模版由Layui官方社区（<a href="http://fly.layui.com/" target="_blank">fly.layui.com</a>）倾情提供，只为表明我们对 Layui 执着的信念、以及对未来持续加强的承诺。该模版基于Layui搭建而成，可作为简约型问答社区的页面支撑。
-                        </p>
-                        <p>Git仓库地址：<a href="https://github.com/layui/fly" target="_blank">https://github.com/layui/fly</a></p>
-                        <p>如果你愿支持Layui持续壮大，欢迎打赏的哟(＾Ｕ＾)ノ~ＹＯ</p>
-                        <p>
-                            <img src="../../res/images/pay.jpg" style="border: 1px solid #e2e2e2">
-                        </p>
+                        <div class="detail-body photos" style="margin-bottom: 20px;">
+                            {{ d.content(rows.content) }}
 
-                        <div class="fly-ad" style="margin-top: 30px; height:90px; overflow: hidden;">
-
+                            <!-- layer-728*90 -->
+                            <div class="fly-ad" style="margin-top: 30px; height:90px; overflow: hidden;">
+                                <script type="text/javascript">
+                                    /*728*90*/
+                                    var cpro_id = "u2482674";
+                                </script>
+                                <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                            </div>
                         </div>
-                    </div>
 
-                    <a name="comment"></a>
-                    <h2 class="page-title">热忱回答<span>（<em id="jiedaCount">18</em>）</span></h2>
+                        {{# var jieda = rows.jieda; }}
 
-                    <ul class="jieda photos" id="jieda">
-                        <li data-id="12" class="jieda-daan">
-                            <a name="item-121212121212"></a>
-                            <div class="detail-about detail-about-reply">
-                                <a class="jie-user" href="">
-                                    <img src="../../res/images/avatar/default.png" alt="">
-                                    <cite>
-                <i>纸飞机</i>
-                <!-- <em>(楼主)</em>
+                        <a name="comment"></a>
+                        <h2 class="page-title">热忱回答<span>{{rows.comment > 0 ? ('（<em id="jiedaCount">'+rows.comment+'</em>）') : ''}}</span></h2>
+
+                        <ul class="jieda photos" id="jieda">
+                            {{# jieda.forEach(function(item, index){ var myda = item.user.username === user.username; }}
+                            <li data-id="{{item.id}}" {{item.id==r ows.accept ? 'class="jieda-daan"' : '' }}>
+                                <a name="item-{{item.time}}"></a>
+                                <div class="detail-about detail-about-reply">
+                                    <a class="jie-user" href="/u/{{168*item.user.id}}/">
+                                        <img src="{{item.user.avatar}}" alt="{{item.user.username}}">
+                                        <cite>
+                <i>{{item.user.username}}</i>
+                {{# if(item.user.rmb) { }}
+                <em style="padding:0 ; color: #FF7200;">VIP{{ lay.util.vip(item.user.rmb) }}</em>
+                {{# } }}
+                {{# if(item.user.username === rows.username){ }}
+                <em>(楼主)</em>
+                {{# } else if(item.user.auth == 1) { }}
                 <em style="color:#5FB878">(管理员)</em>
+                {{# } else if(item.user.auth == 2) { }}
                 <em style="color:#FF9E3F">（活雷锋）</em>
-                <em style="color:#999">（该号已被封）</em> -->
+                {{# } else if(item.user.auth == -1) { }}
+                <em style="color:#999">（该号已被封）</em>
+                {{# } }}
               </cite>
-                                </a>
-                                <div class="detail-hits">
-                                    <span>3分钟前</span>
+                                    </a>
+                                    <div class="detail-hits">
+                                        <span>{{lay.time(item.time)}}</span>
+                                    </div>
+                                    {{# if(item.id == rows.accept){ }}
+                                    <i class="iconfont icon-caina" title="最佳答案"></i> {{# } }}
                                 </div>
-                                <i class="iconfont icon-caina" title="最佳答案"></i>
-                            </div>
-                            <div class="detail-body jieda-body">
-                                <p>么么哒</p>
-                            </div>
-                            <div class="jieda-reply">
-                                <span class="jieda-zan zanok" type="zan"><i class="iconfont icon-zan"></i><em>12</em></span>
-                                <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
-                                <!-- <div class="jieda-admin">
-              <span type="edit">编辑</span>
-              <span type="del">删除</span>
-              <span class="jieda-accept" type="accept">采纳</span>
-            </div> -->
-                            </div>
-                        </li>
+                                <div class="detail-body jieda-body">
+                                    {{ d.content(item.content) }}
+                                </div>
+                                <div class="jieda-reply">
+                                    <span class="jieda-zan {{d.session['zan'+item.id] ? 'zanok' : ''}}" type="zan">
+            <i class="iconfont icon-zan"></i>
+            <em>{{item.praise}}</em>
+          </span>
+                                    <span type="reply">
+            <i class="iconfont icon-svgmoban53"></i>
+            回复
+          </span> {{# if(user.auth == 1 || user.auth == 2 || (user.username && myself && !myda)){ }}
+                                    <div class="jieda-admin">
+                                        {{# if(user.auth == 1 || (user.auth == 2 && item.accept != 1)){ }}
+                                        <span type="edit">
+                编辑
+              </span>
+                                        <span type="del">
+                删除
+              </span> {{# if(rows.accept == -1){ }}
+                                        <span class="jieda-accept" type="accept">
+                采纳
+              </span> {{# } }} {{# } else if(rows.accept == -1 && !myda){ }}
+                                        <span class="jieda-accept" type="accept">
+                采纳
+              </span> {{# } }}
+                                    </div>
+                                    {{# } }}
+                                </div>
+                            </li>
+                            {{# }); if(jieda.length === 0){ }}
+                            <li class="fly-none">没有任何回答</li>
+                            {{# } }}
+                        </ul>
 
-                        <li data-id="13">
-                            <a name="item-121212121212"></a>
-                            <div class="detail-about detail-about-reply">
-                                <a class="jie-user" href="">
-                                    <img src="../../res/images/avatar/default.png" alt="">
-                                    <cite>
-                <i>香菇</i>
-                <em style="color:#FF9E3F">活雷锋</em>
-              </cite>
-                                </a>
-                                <div class="detail-hits">
-                                    <span>刚刚</span>
-                                </div>
-                            </div>
-                            <div class="detail-body jieda-body">
-                                <p>蓝瘦</p>
-                            </div>
-                            <div class="jieda-reply">
-                                <span class="jieda-zan" type="zan"><i class="iconfont icon-zan"></i><em>0</em></span>
-                                <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
-                                <div class="jieda-admin">
-                                    <span type="edit">编辑</span>
-                                    <span type="del">删除</span>
-                                    <span class="jieda-accept" type="accept">采纳</span>
-                                </div>
-                            </div>
-                        </li>
+                        {{ d.laypage }}
 
-                        <!-- <li class="fly-none">没有任何回答</li> -->
-                    </ul>
-
-                    <div class="layui-form layui-form-pane">
-                        <form action="/jie/reply/" method="post">
-                            <div class="layui-form-item layui-form-text">
-                                <div class="layui-input-block">
-                                    <textarea id="L_content" name="content" required lay-verify="required" placeholder="我要回答'" class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+                        <div class="layui-form layui-form-pane">
+                            <form action="/jie/reply/" method="post">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class="layui-input-block">
+                                        <textarea id="L_content" name="content" required lay-verify="required" placeholder="我要{{myself ? '自问自答' : '回答'}}" class="layui-textarea fly-editor" style="height: 150px;">{{d.edit ? d.edit.content : ''}}</textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <input type="hidden" name="jid" value="{{rows.id}}">
-                                <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
-                            </div>
-                        </form>
+                                <div class="layui-form-item">
+                                    <input type="hidden" name="jid" value="{{rows.id}}">
+                                    <button class="layui-btn" lay-filter="*" lay-submit>提交回答</button>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
-
+                </div>
+                <div class="edge">
+                    <h3 class="page-title">最近热帖</h3>
+                    <ol class="fly-list-one">
+                        {{# d.hot.forEach(function(item){ }}
+                        <li>
+                            <a href="/jie/{{item.id}}.html">{{= item.title }}</a>
+                            <span><i class="iconfont">&#xe60b;</i> {{item.hits}}</span>
+                        </li>
+                        {{# }); }}
+                    </ol>
                 </div>
             </div>
-            <div class="edge">
+            {{# } else { }}
+            <h2 class="page-title">404</h2>
+            <div class="fly-none">该问题并不存在，肯能已被删除</div>
+            {{# } }}
 
-                <h3 class="page-title">最近热帖</h3>
-                <ol class="fly-list-one">
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 6087</span>
-                    </li>
-                    <li>
-                        <a href=" ">Java实现LayIM后端的核心代码</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                    <li>
-                        <a href=" ">Layui 官网 在线演示页面 全面增加 查看代码 功能</a>
-                        <span><i class="iconfont">&#xe60b;</i> 767</span>
-                    </li>
-                </ol>
-
-                <h3 class="page-title">近期热议</h3>
-                <ol class="fly-list-one">
-                    <li>
-                        <a href=" ">盛赞！大赞狂赞！Layui完美兼容Vue.js</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">盛赞！大赞狂赞！Layui完美兼容Vue.js</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">盛赞！大赞狂赞！Layui完美兼容Vue.js</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">盛赞！大赞狂赞！Layui完美兼容Vue.js</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">盛赞！大赞狂赞！Layui完美兼容Vue.js</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">盛赞！大赞狂赞！Layui完美兼容Vue.js</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">Java实现LayIM后端的核心代码</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                    <li>
-                        <a href=" ">Java实现LayIM后端的核心代码</a>
-                        <span><i class="iconfont">&#xe60c;</i> 96</span>
-                    </li>
-                </ol>
-
-            </div>
-        </div>
-
-
-        <!-- <h2 class="page-title">404</h2>
-<div class="fly-none">该问题并不存在，可能已被删除</div> -->
-
-
+        </script>
+        <div id="details"></div>
 
         <jsp:include page="../layoutbbs/footer.jsp "></jsp:include>
         <script>
@@ -248,15 +194,38 @@
                 base: '../Resources/fly/mods/'
             }).extend({
                 fly: 'index'
-            }).use('fly', function() {
+            }).use(['fly', 'jquery', 'laytpl'], function() {
                 var fly = layui.fly;
-                //如果你是采用模版自带的编辑器，你需要开启以下语句来解析。
-                /*
-                $('.detail-body').each(function(){
-                  var othis = $(this), html = othis.html();
-                  othis.html(fly.content(html));
+                var $ = layui.jquery;
+                var laytpl = layui.laytpl;
+
+                $.get("/questions/getone", { //问题详情
+                    id: 'f1213640-9c92-4aa8-8cfb-641f4855b63c'
+                }, function(data) {
+                    var obj = JSON.parse(data);
+                    var getTpl = $("#detail").html();
+                    laytpl(getTpl).render(obj, function(html) {
+                        $("#details").html(html);
+                    });
                 });
-                */
+
+
+                // $('.detail-body').each(function() {
+                //     var othis = $(this),
+                //         html = othis.html();
+                //     othis.html(fly.content(html));
+                // });
+
+                $.get("/questions/get", { //热贴
+                    index: 1,
+                    size: 8
+                }, function(data) {
+                    var obj = JSON.parse(data);
+                    var getTpl = $("#hotquestion").html();
+                    laytpl(getTpl).render(obj, function(html) {
+                        $("#hotquestions").html(html);
+                    });
+                });
             });
         </script>
 

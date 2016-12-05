@@ -455,63 +455,63 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeIsNull() {
-            addCriterion("CreatedTime is null");
+        public Criteria andTimeIsNull() {
+            addCriterion("time is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeIsNotNull() {
-            addCriterion("CreatedTime is not null");
+        public Criteria andTimeIsNotNull() {
+            addCriterion("time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeEqualTo(Date value) {
-            addCriterion("CreatedTime =", value, "createdtime");
+        public Criteria andTimeEqualTo(Date value) {
+            addCriterion("time =", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeNotEqualTo(Date value) {
-            addCriterion("CreatedTime <>", value, "createdtime");
+        public Criteria andTimeNotEqualTo(Date value) {
+            addCriterion("time <>", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeGreaterThan(Date value) {
-            addCriterion("CreatedTime >", value, "createdtime");
+        public Criteria andTimeGreaterThan(Date value) {
+            addCriterion("time >", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("CreatedTime >=", value, "createdtime");
+        public Criteria andTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("time >=", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeLessThan(Date value) {
-            addCriterion("CreatedTime <", value, "createdtime");
+        public Criteria andTimeLessThan(Date value) {
+            addCriterion("time <", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeLessThanOrEqualTo(Date value) {
-            addCriterion("CreatedTime <=", value, "createdtime");
+        public Criteria andTimeLessThanOrEqualTo(Date value) {
+            addCriterion("time <=", value, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeIn(List<Date> values) {
-            addCriterion("CreatedTime in", values, "createdtime");
+        public Criteria andTimeIn(List<Date> values) {
+            addCriterion("time in", values, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeNotIn(List<Date> values) {
-            addCriterion("CreatedTime not in", values, "createdtime");
+        public Criteria andTimeNotIn(List<Date> values) {
+            addCriterion("time not in", values, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeBetween(Date value1, Date value2) {
-            addCriterion("CreatedTime between", value1, value2, "createdtime");
+        public Criteria andTimeBetween(Date value1, Date value2) {
+            addCriterion("time between", value1, value2, "time");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedtimeNotBetween(Date value1, Date value2) {
-            addCriterion("CreatedTime not between", value1, value2, "createdtime");
+        public Criteria andTimeNotBetween(Date value1, Date value2) {
+            addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
 
@@ -585,63 +585,123 @@ public class AnswerExample {
             return (Criteria) this;
         }
 
-        public Criteria andStateIsNull() {
-            addCriterion("State is null");
+        public Criteria andAcceptIsNull() {
+            addCriterion("accept is null");
             return (Criteria) this;
         }
 
-        public Criteria andStateIsNotNull() {
-            addCriterion("State is not null");
+        public Criteria andAcceptIsNotNull() {
+            addCriterion("accept is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStateEqualTo(Integer value) {
-            addCriterion("State =", value, "state");
+        public Criteria andAcceptEqualTo(Integer value) {
+            addCriterion("accept =", value, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotEqualTo(Integer value) {
-            addCriterion("State <>", value, "state");
+        public Criteria andAcceptNotEqualTo(Integer value) {
+            addCriterion("accept <>", value, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateGreaterThan(Integer value) {
-            addCriterion("State >", value, "state");
+        public Criteria andAcceptGreaterThan(Integer value) {
+            addCriterion("accept >", value, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateGreaterThanOrEqualTo(Integer value) {
-            addCriterion("State >=", value, "state");
+        public Criteria andAcceptGreaterThanOrEqualTo(Integer value) {
+            addCriterion("accept >=", value, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateLessThan(Integer value) {
-            addCriterion("State <", value, "state");
+        public Criteria andAcceptLessThan(Integer value) {
+            addCriterion("accept <", value, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateLessThanOrEqualTo(Integer value) {
-            addCriterion("State <=", value, "state");
+        public Criteria andAcceptLessThanOrEqualTo(Integer value) {
+            addCriterion("accept <=", value, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateIn(List<Integer> values) {
-            addCriterion("State in", values, "state");
+        public Criteria andAcceptIn(List<Integer> values) {
+            addCriterion("accept in", values, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotIn(List<Integer> values) {
-            addCriterion("State not in", values, "state");
+        public Criteria andAcceptNotIn(List<Integer> values) {
+            addCriterion("accept not in", values, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateBetween(Integer value1, Integer value2) {
-            addCriterion("State between", value1, value2, "state");
+        public Criteria andAcceptBetween(Integer value1, Integer value2) {
+            addCriterion("accept between", value1, value2, "accept");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotBetween(Integer value1, Integer value2) {
-            addCriterion("State not between", value1, value2, "state");
+        public Criteria andAcceptNotBetween(Integer value1, Integer value2) {
+            addCriterion("accept not between", value1, value2, "accept");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseIsNull() {
+            addCriterion("praise is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseIsNotNull() {
+            addCriterion("praise is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseEqualTo(Integer value) {
+            addCriterion("praise =", value, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseNotEqualTo(Integer value) {
+            addCriterion("praise <>", value, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseGreaterThan(Integer value) {
+            addCriterion("praise >", value, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseGreaterThanOrEqualTo(Integer value) {
+            addCriterion("praise >=", value, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseLessThan(Integer value) {
+            addCriterion("praise <", value, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseLessThanOrEqualTo(Integer value) {
+            addCriterion("praise <=", value, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseIn(List<Integer> values) {
+            addCriterion("praise in", values, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseNotIn(List<Integer> values) {
+            addCriterion("praise not in", values, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseBetween(Integer value1, Integer value2) {
+            addCriterion("praise between", value1, value2, "praise");
+            return (Criteria) this;
+        }
+
+        public Criteria andPraiseNotBetween(Integer value1, Integer value2) {
+            addCriterion("praise not between", value1, value2, "praise");
             return (Criteria) this;
         }
     }
