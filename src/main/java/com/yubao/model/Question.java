@@ -1,9 +1,5 @@
 package com.yubao.model;
 
-import com.agapple.mapping.BeanMapping;
-import com.util.temp.QuestionWithAnswers;
-import com.util.temp.UserViewModel;
-
 import java.util.Date;
 
 public class Question {
