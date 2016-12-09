@@ -39,9 +39,9 @@
 
                     {{ rows.stick > 0 ? '<span class="fly-tip-stick">置顶帖</span>' :'' }}
                     {{ rows.status == 1 ? '<span class="fly-tip-jing">精帖</span>' : ''}}
-                    {{# if(rows.accept === -1){ }}
+                    {{# if(rows.accept == undefined){ }}
                     <span>未结贴</span>
-                    {{# } else if(rows.accept >= 0 ){ }}
+                    {{# } else{ }}
                     <span class="fly-tip-jie">已采纳</span>
                     {{# } }}
 
@@ -215,25 +215,30 @@
 <script>
     layui.cache.page = 'jie';
 
-    layui.config({
-        version: "1.0.0",
-        base: '../Resources/fly/mods/'
-    }).extend({
-        fly: 'index'
-    }).use(['fly', 'jquery', 'laytpl'], function () {
-        var fly = layui.fly;
-        var $ = layui.jquery;
-        var laytpl = layui.laytpl;
+    $.get("/questions/getone", { //问题详情
+        id: QueryString['id']
+    }, function (data) {
+        var obj = JSON.parse(data);
 
-        $.get("/questions/getone", { //问题详情
-            id: QueryString['id']
-        }, function (data) {
-            var obj = JSON.parse(data);
-            var getTpl = $("#detail").html();
-            laytpl(getTpl).render(obj, function (html) {
-                $("#details").html(html);
-            });
+        layui.config({
+            version: "1.0.0",
+            base: '../Resources/fly/mods/'
+        }).extend({
+            fly: 'index'
+        }).use(['fly', 'jquery', 'laytpl','form'], function () {
+            var fly = layui.fly;
+            var $ = layui.jquery;
+            var laytpl = layui.laytpl;
+            var form = layui.form();
+
+        var getTpl = $("#detail").html();
+        laytpl(getTpl).render(obj, function (html) {
+            $("#details").html(html);
         });
+    });
+
+
+
 
 
         // $('.detail-body').each(function() {
