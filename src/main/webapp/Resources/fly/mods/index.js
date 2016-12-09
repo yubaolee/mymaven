@@ -234,21 +234,21 @@ layui.define(['layer', 'laytpl', 'form', 'upload', 'util'], function(exports) {
         ,
         newmsg: function() {
             if (layui.cache.user.uid !== -1) {
-                gather.json('/api/msg-count', {
-                    _: new Date().getTime()
-                }, function(res) {
-                    if (res.status === 0 && res.count > 0) {
-                        var msg = $('<a class="nav-message" href="javascript:;" title="您有' + res.count + '条未阅读的消息">' + res.count + '</a>');
-                        $('.nav-user').append(msg);
-                        msg.on('click', function() {
-                            gather.json('/api/msg-read', {}, function(res) {
-                                if (res.status === 0) {
-                                    location.href = '/user/message/';
-                                }
-                            });
-                        });
-                    }
-                });
+                // gather.json('/api/msg-count', {
+                //     _: new Date().getTime()
+                // }, function(res) {
+                //     if (res.status === 0 && res.count > 0) {
+                //         var msg = $('<a class="nav-message" href="javascript:;" title="您有' + res.count + '条未阅读的消息">' + res.count + '</a>');
+                //         $('.nav-user').append(msg);
+                //         msg.on('click', function() {
+                //             gather.json('/api/msg-read', {}, function(res) {
+                //                 if (res.status === 0) {
+                //                     location.href = '/user/message/';
+                //                 }
+                //             });
+                //         });
+                //     }
+                // });
             }
             return arguments.callee;
         }

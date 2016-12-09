@@ -71,13 +71,7 @@
         <jsp:include page="../layoutbbs/footer.jsp "></jsp:include>
         <script>
             layui.cache.page = 'jie';
-            layui.cache.user = {
-                username: '游客',
-                uid: -1,
-                avatar: '../Resources/fly/images/avatar/00.jpg',
-                experience: 83,
-                sex: '男'
-            };
+
             layui.config({
                 version: "1.0.0 ",
                 base: '../Resources/fly/mods/'

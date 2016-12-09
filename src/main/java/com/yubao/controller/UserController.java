@@ -3,6 +3,7 @@ package com.yubao.controller;
 import com.util.Const;
 import com.util.MD5;
 import com.util.Response;
+import com.util.temp.UserViewModel;
 import com.yubao.model.User;
 import com.yubao.service.LoginService;
 import com.yubao.service.UserService;
@@ -59,7 +60,7 @@ public class UserController extends BaseController {
             resp.Result = null;
         }else{
             resp.Status = true;
-            resp.Result = user;
+            resp.Result = UserViewModel.From(user);
         }
 
         out.getWriter().print(gson.toJson(resp));

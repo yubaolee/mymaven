@@ -44,13 +44,15 @@
                                 {{# layui.each(d.Result.objects, function(index, item){ }}
                                 <li class="fly-list-li">
                                     <a href="#" class="fly-list-avatar">
-                                        <img src="../Resources/fly/images/avatar/default.png" alt="">
+                                        <img src="../Resources/fly/images/avatar/{{item.user.pic}}" alt="">
                                     </a>
                                     <h2 class="fly-tip">
-                                        <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a> {{ item.stick > 0 ? '<span class="fly-tip-stick">置顶</span>' :'' }} {{ item.status == 1 ? '<span class="fly-tip-jing">精帖</span>' : ''}}
+                                        <a href="/questions/detail?id={{ item.id }}">{{ item.title }}</a>
+                                        {{ item.stick > 0 ? '<span class="fly-tip-stick">置顶</span>' :'' }}
+                                        {{ item.status == 1 ? '<span class="fly-tip-jing">精帖</span>' : ''}}
                                     </h2>
                                     <p>
-                                        <span><a href="#">{{ item.userid }}</a></span>
+                                        <span><a href="#">{{ item.user.name }}</a></span>
                                         <span>{{item.time}} </span>
                                         <span>OpenAuth.Net框架综合</span>
                                         <span class="fly-list-hint">
@@ -122,13 +124,7 @@
         <script src="../blljs/clubindex.js"></script>
         <script>
             layui.cache.page = '';
-            layui.cache.user = {
-                username: '游客',
-                uid: -1,
-                avatar: '../Resources/fly/images/avatar/00.jpg',
-                experience: 83,
-                sex: '男'
-            };
+
             layui.config({
                 version: "1.0.0",
                 base: '../Resources/fly/mods/'

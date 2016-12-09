@@ -10,7 +10,9 @@
     <meta name="Description" content="openauth.net,openauth,权限管理，工作流,workflow">
     <link rel="stylesheet" href="../Resources/layui/css/layui.css">
     <link rel="stylesheet" href="../Resources/fly/css/global.css">
+    <script src="../Resources/jquery.js"></script>
     <script src="../Resources/layui/layui.js"></script>
+    <script src="/blljs/queryString.js"></script>
 </head>
 
 <body>
@@ -23,11 +25,11 @@
     }}
 
     {{#
-    var user ={ id:'d8c8a352-452f-45ea-b699-4dc566885694', auth:1 };
+    var user =layui.cache.user;
     }}
 
     {{# if(rows){
-    var myself = rows.uid === user.id;
+    var myself = rows.user.id === user.id;
     }}
     <div class="main layui-clear">
         <div class="wrap">
@@ -67,10 +69,10 @@
                     </div>
                 </div>
                 <div class="detail-about">
-                    <a class="jie-user" href="/u/{{168*rows.uid}}/">
-                        <img src="{{rows.user.avatar}}" alt="{{rows.user.username}}">
+                    <a class="jie-user" href="/u/{{168*rows.id}}/">
+                        <img src="../Resources/fly/images/avatar/{{rows.user.pic}}" alt="{{rows.user.name}}">
                         <cite>
-                            {{rows.user.username}}
+                            {{rows.user.name}}
                             {{# if(rows.user.rmb){ }}
                             <em style="padding:0 5px; color: #FF7200;">VIP{{rows.user.rmb}}</em>
                             {{# } }}
@@ -82,7 +84,7 @@
 
                         <span style="color:#FF7200">悬赏：{{rows.experience}}飞吻</span>
 
-                        {{# if((user.username && myself && rows.accept == -1) || user.auth == 1){ }}
+                        {{# if((user.name && myself && rows.accept == -1) || user.auth == 1){ }}
                         <span class="jie-admin" type="edit"><a href="/jie/edit/{{rows.id}}">编辑此贴</a></span>
                         {{# } }}
 
@@ -106,19 +108,19 @@
 
                 <ul class="jieda photos" id="jieda">
                     {{# layui.each(jieda, function(index, item){
-                    var myda = item.user.username === user.username;
+                    var myda = item.user.name === user.name;
                     }}
                     <li data-id="{{item.id}}" {{item.id== rows.accept ?'class="jieda-daan"' : '' }}>
                     <a name="item-{{item.time}}"></a>
                     <div class="detail-about detail-about-reply">
                         <a class="jie-user" href="/u/{{168*item.user.id}}/">
-                            <img src="{{item.user.avatar}}" alt="{{item.user.username}}">
+                            <img src="../Resources/fly/images/avatar/{{item.user.pic}}" alt="{{item.user.name}}">
                             <cite>
-                                <i>{{item.user.username}}</i>
+                                <i>{{item.user.name}}</i>
                                 {{# if(item.user.rmb) { }}
                                 <em style="padding:0 ; color: #FF7200;">VIP{{ item.user.rmb }}</em>
                                 {{# } }}
-                                {{# if(item.user.username === rows.username){ }}
+                                {{# if(item.user.id === rows.id){ }}
                                 <em>(楼主)</em>
                                 {{# } else if(item.user.auth == 1) { }}
                                 <em style="color:#5FB878">(管理员)</em>
@@ -144,7 +146,7 @@
             <i class="iconfont icon-svgmoban53"></i>
             回复
           </span>
-                        {{# if(user.auth == 1 || user.auth == 2 || (user.username && myself && !myda)){ }}
+                        {{# if(user.auth == 1 || user.auth == 2 || (user.name && myself && !myda)){ }}
                         <div class="jieda-admin">
                             {{# if(user.auth == 1 || (user.auth == 2 && item.accept != 1)){ }}
                             <span type="edit">
@@ -192,6 +194,14 @@
 
             </div>
         </div>
+
+        <div class="edge">
+            <h3 class="page-title">最近热帖</h3>
+            <ol class="fly-list-one">
+                无数据
+
+            </ol>
+        </div>
     </div>
     {{# } else { }}
     <h2 class="page-title">404</h2>
@@ -204,13 +214,7 @@
 <jsp:include page="../layoutbbs/footer.jsp "></jsp:include>
 <script>
     layui.cache.page = 'jie';
-    layui.cache.user = {
-        username: '游客',
-        uid: -1,
-        avatar: '../Resources/fly/images/avatar/00.jpg',
-        experience: 83,
-        sex: '男'
-    };
+
     layui.config({
         version: "1.0.0",
         base: '../Resources/fly/mods/'
@@ -222,7 +226,7 @@
         var laytpl = layui.laytpl;
 
         $.get("/questions/getone", { //问题详情
-            id: 'cb19e855-ec72-4be2-a6e4-60b9c59189d6'
+            id: QueryString['id']
         }, function (data) {
             var obj = JSON.parse(data);
             var getTpl = $("#detail").html();
@@ -238,16 +242,16 @@
         //     othis.html(fly.content(html));
         // });
 
-        // $.get("/questions/get", { //热贴
-        //     index: 1,
-        //     size: 8
-        // }, function(data) {
-        //     var obj = JSON.parse(data);
-        //     var getTpl = $("#hotquestion").html();
-        //     laytpl(getTpl).render(obj, function(html) {
-        //         $("#hotquestions").html(html);
-        //     });
-        // });
+//         $.get("/questions/get", { //热贴
+//             index: 1,
+//             size: 8
+//         }, function(data) {
+//             var obj = JSON.parse(data);
+//             var getTpl = $("#hotquestion").html();
+//             laytpl(getTpl).render(obj, function(html) {
+//                 $("#hotquestions").html(html);
+//             });
+//         });
     });
 </script>
 
