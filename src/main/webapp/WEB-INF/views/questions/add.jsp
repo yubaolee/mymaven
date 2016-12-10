@@ -40,7 +40,7 @@
                         <div class="layui-inline ">
                             <label class="layui-form-label ">悬赏金额</label>
                             <div class="layui-input-block ">
-                                <select name="reward">
+                                <select name="experience">
                                 <option value="5 " selected>5</option>
                                 <option value="20 ">20</option>
                                 <option value="50 ">50</option>

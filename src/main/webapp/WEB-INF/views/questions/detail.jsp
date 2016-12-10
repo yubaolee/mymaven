@@ -103,7 +103,7 @@
 
                 <ul class="jieda photos" id="jieda">
                     {{# layui.each(jieda, function(index, item){
-                    var myda = item.user.name === user.name;
+                    var myda = item.user.name == user.name;
                     }}
                     <li data-id="{{item.id}}" {{item.id== rows.accept ?'class="jieda-daan"' : '' }}>
                     <a name="item-{{item.time}}"></a>
@@ -115,7 +115,7 @@
                                 {{# if(item.user.rmb) { }}
                                 <em style="padding:0 ; color: #FF7200;">VIP{{ item.user.rmb }}</em>
                                 {{# } }}
-                                {{# if(item.user.id === rows.id){ }}
+                                {{# if(item.user.id == rows.user.id){ }}
                                 <em>(楼主)</em>
                                 {{# } else if(item.user.auth == 1) { }}
                                 <em style="color:#5FB878">(管理员)</em>

@@ -41,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
         if(size ==0) size = 10;
 
         QuestionExample exp = new QuestionExample();
-
+        exp.setOrderByClause("time desc");
 
         if(key != null && !key.equals(""))
         {
@@ -82,6 +82,7 @@ public class QuestionServiceImpl implements QuestionService {
         answer.setUserid(user.getId());
         answer.setContent(content);
         answer.setAnswerto(jid);
+        answer.setTime(new Date());
         _answerMapper.insertSelective(answer);
 
         addCommontCnt(jid);

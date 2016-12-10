@@ -94,7 +94,7 @@
   </resultMap>
 
   <select id="getAnswerVMs" resultMap="answervmmapper" parameterType="String" >
-    SELECT a.*,u.`name`,u.rmb,u.pic from answer as a LEFT JOIN `user` as u on a.UserId=u.id where a.AnswerTo=#{questionid}
+    SELECT a.*,u.`name`,u.rmb,u.pic from answer as a LEFT JOIN `user` as u on a.UserId=u.id where a.AnswerTo=#{questionid} ORDER  by a.time
   </select>
 
 
