@@ -5,6 +5,7 @@ import com.util.temp.QuestionViewModel;
 import com.yubao.dao.AnswerMapper;
 import com.yubao.dao.QuestionMapper;
 import com.yubao.dao.UserMapper;
+import com.yubao.model.Answer;
 import com.yubao.model.Question;
 import com.yubao.model.QuestionExample;
 import com.yubao.model.User;
@@ -64,10 +65,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     public String add(Question question) throws Exception {
-        User user = loginService.get();
-        if(user == null){
-            throw new Exception("请先登录");
-        }
+        User user = checkLogin();
         String id = UUID.randomUUID().toString();
         question.setUserid(user.getId());
         question.setTime(new Date());
@@ -76,9 +74,56 @@ public class QuestionServiceImpl implements QuestionService {
         return id;
     }
 
+    public String addAnswer(String jid, String content) throws Exception {
+        User user = checkLogin();
+        String id = UUID.randomUUID().toString();
+        Answer answer = new Answer();
+        answer.setId(id);
+        answer.setUserid(user.getId());
+        answer.setContent(content);
+        answer.setAnswerto(jid);
+        _answerMapper.insertSelective(answer);
+
+        addCommontCnt(jid);
+        return id;
+
+    }
+
+
+
     public QuestionViewModel Get(String id) {
         QuestionViewModel q = _mapper.getQuestionVM(id);
         q.answers = _answerMapper.getAnswerVMs(q.getId());
+        addHitCnt(id);
         return q;
+    }
+
+
+    private User checkLogin() throws Exception {
+        User user = loginService.get();
+        if(user == null){
+            throw new Exception("请先登录");
+        }
+        return user;
+    }
+
+    private void addCommontCnt(String id){
+        QuestionExample exp = new QuestionExample();
+        QuestionExample.Criteria criteria = exp.createCriteria();
+        criteria.andIdEqualTo(id);
+
+        Question question = _mapper.selectByPrimaryKey(id);
+        question.setComment(question.getComment() + 1);
+        _mapper.updateByExampleSelective(question, exp);
+    }
+
+    private void addHitCnt(String id){
+        QuestionExample exp = new QuestionExample();
+        QuestionExample.Criteria criteria = exp.createCriteria();
+        criteria.andIdEqualTo(id);
+
+        Question question = _mapper.selectByPrimaryKey(id);
+        question.setHits(question.getHits() + 1);
+        _mapper.updateByExampleSelective(question, exp);
     }
 }

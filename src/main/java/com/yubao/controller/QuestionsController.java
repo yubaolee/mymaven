@@ -73,4 +73,22 @@ public class QuestionsController extends BaseController {
         out.getWriter().print(gson.toJson(response));
     }
 
+    @ResponseBody
+    @RequestMapping(value="addAnswer",method = RequestMethod.POST)
+    public void addAnswer(HttpServletResponse out, String jid, String content) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        try {
+            _service.addAnswer(jid, content);
+            response.Status = true;
+            response.Result ="";
+            response.Message = "操作成功";
+        }catch (Exception e)
+        {
+            response.Status = false;
+            response.Message = e.getMessage();
+        }
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
 }

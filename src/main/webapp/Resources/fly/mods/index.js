@@ -324,7 +324,7 @@ layui.define(['layer', 'laytpl', 'form', 'upload', 'util'], function(exports) {
             button = $(data.elem);
         gather.json(action, data.field, function(res) {
             var end = function() {
-                if (res.Result) { //在Result里面存放跳转
+                if (res.Result && res.Result != "") { //在Result里面存放跳转
                     location.href = res.Result;
                 } else {
                     gather.form[action || button.attr('key')](data.field, data.form);

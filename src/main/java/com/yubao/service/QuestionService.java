@@ -14,6 +14,7 @@ public interface QuestionService {
     PageObject<QuestionViewModel> Get(String key, int index, int size);
 
     String add(Question question) throws Exception;
+    String addAnswer(String jid, String content) throws Exception;
 
     QuestionViewModel Get(String id);
 }

@@ -93,11 +93,6 @@
 
                 <div class="detail-body photos" style="margin-bottom: 20px;">
                     {{ rows.content }}
-
-                    <!-- layer-728*90 -->
-                    <div class="fly-ad" style="margin-top: 30px; height:90px; overflow: hidden;">
-
-                    </div>
                 </div>
 
                 {{# var jieda = rows.answers; }}
@@ -174,10 +169,10 @@
                     {{# } }}
                 </ul>
 
-                {{ d.laypage }}
+
 
                 <div class="layui-form layui-form-pane">
-                    <form action="/jie/reply/" method="post">
+                    <form action="/questions/addAnswer" method="post">
                         <div class="layui-form-item layui-form-text">
                             <div class="layui-input-block">
                                 <textarea id="L_content" name="content" required lay-verify="required"
@@ -234,6 +229,12 @@
         var getTpl = $("#detail").html();
         laytpl(getTpl).render(obj, function (html) {
             $("#details").html(html);
+
+             $('.detail-body').each(function() {
+                 var othis = $(this),
+                     html = othis.html();
+                 othis.html(fly.content(html));
+             });
         });
     });
 
@@ -241,11 +242,7 @@
 
 
 
-        // $('.detail-body').each(function() {
-        //     var othis = $(this),
-        //         html = othis.html();
-        //     othis.html(fly.content(html));
-        // });
+
 
 //         $.get("/questions/get", { //热贴
 //             index: 1,

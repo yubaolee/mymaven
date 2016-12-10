@@ -67,6 +67,7 @@
                         <div id="questions"></div>
                     </ul>
 
+                    <div id="pager"></div>
                 </div>
             </div>
             <div class="edge">

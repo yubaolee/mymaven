@@ -1,6 +1,6 @@
-  layui.use('laytpl', function() {
+  layui.use(['laypage', 'laytpl'], function() {
       var laytpl = layui.laytpl;
-
+      var laypage = layui.laypage;
       $.get("../questions/get", {
           index: 1,
           size: 20
@@ -9,6 +9,12 @@
           var getTpl = $("#question").html();
           laytpl(getTpl).render(obj, function(html) {
               $("#questions").html(html);
+          });
+
+          laypage({
+              cont: 'pager'
+              ,pages: obj.Result.pagecnt //总页数
+              ,groups: 5 //连续显示分页数
           });
       });
 
