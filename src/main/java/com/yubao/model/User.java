@@ -17,7 +17,7 @@ public class User {
     /**
     * VIP等级
     */
-    private Integer rmb;
+    private int rmb;
 
     private Date createtime;
 
@@ -27,21 +27,21 @@ public class User {
 
     private String qqopenid;
 
-    private Integer questioncnt;
+    private int questioncnt;
 
-    private Integer answercnt;
+    private int answercnt;
 
     private String pic;
 
     /**
     * 用户权限
     */
-    private Integer auth;
+    private int auth;
 
     /**
     * 经验值
     */
-    private Integer experience;
+    private int experience;
 
     public String getId() {
         return id;
@@ -75,11 +75,11 @@ public class User {
         this.pwd = pwd;
     }
 
-    public Integer getRmb() {
+    public int getRmb() {
         return rmb;
     }
 
-    public void setRmb(Integer rmb) {
+    public void setRmb(int rmb) {
         this.rmb = rmb;
     }
 
@@ -115,19 +115,19 @@ public class User {
         this.qqopenid = qqopenid;
     }
 
-    public Integer getQuestioncnt() {
+    public int getQuestioncnt() {
         return questioncnt;
     }
 
-    public void setQuestioncnt(Integer questioncnt) {
+    public void setQuestioncnt(int questioncnt) {
         this.questioncnt = questioncnt;
     }
 
-    public Integer getAnswercnt() {
+    public int getAnswercnt() {
         return answercnt;
     }
 
-    public void setAnswercnt(Integer answercnt) {
+    public void setAnswercnt(int answercnt) {
         this.answercnt = answercnt;
     }
 
@@ -139,19 +139,19 @@ public class User {
         this.pic = pic;
     }
 
-    public Integer getAuth() {
+    public int getAuth() {
         return auth;
     }
 
-    public void setAuth(Integer auth) {
+    public void setAuth(int auth) {
         this.auth = auth;
     }
 
-    public Integer getExperience() {
+    public int getExperience() {
         return experience;
     }
 
-    public void setExperience(Integer experience) {
+    public void setExperience(int experience) {
         this.experience = experience;
     }
 
