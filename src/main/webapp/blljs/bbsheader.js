@@ -10,7 +10,8 @@
                   uid: obj.Result.id,
                   avatar: '../Resources/fly/images/avatar/' + obj.Result.pic,
                   experience: obj.Result.experience,
-                  sex: '男'
+                  sex: '男',
+                  auth:obj.Result.auth
               };
           }
           else{
@@ -19,7 +20,8 @@
                   uid: -1,
                   avatar: '../Resources/fly/images/avatar/00.jpg',
                   experience: 83,
-                  sex: '男'
+                  sex: '男',
+                  auth:0
               };
           }
 

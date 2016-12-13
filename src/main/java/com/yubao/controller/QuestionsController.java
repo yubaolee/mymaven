@@ -73,6 +73,46 @@ public class QuestionsController extends BaseController {
         out.getWriter().print(gson.toJson(response));
     }
 
+    /**
+     * 删除问答
+     */
+    @ResponseBody
+    @RequestMapping(value="del",method = RequestMethod.POST)
+    public void del(HttpServletResponse out, String id) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        try {
+            _service.del(id);
+            response.Status = true;
+            response.Message = "操作成功";
+        }catch (Exception e)
+        {
+            response.Status = false;
+            response.Message = e.getMessage();
+        }
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
+    /**
+     * 设置问题状态
+     */
+    @ResponseBody
+    @RequestMapping(value="set",method = RequestMethod.POST)
+    public void set(HttpServletResponse out, String id, String field, int rank) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        try {
+            _service.set(id, field, rank);
+            response.Status = true;
+            response.Message = "操作成功";
+        }catch (Exception e)
+        {
+            response.Status = false;
+            response.Message = e.getMessage();
+        }
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
     @ResponseBody
     @RequestMapping(value="addAnswer",method = RequestMethod.POST)
     public void addAnswer(HttpServletResponse out, String jid, String content) throws IOException {
@@ -90,5 +130,46 @@ public class QuestionsController extends BaseController {
 
         out.getWriter().print(gson.toJson(response));
     }
+
+    /**
+     * 删除回答
+     */
+    @ResponseBody
+    @RequestMapping(value="delAnswer",method = RequestMethod.POST)
+    public void delAnswer(HttpServletResponse out, String id) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        try {
+            _service.delAnswer(id);
+            response.Status = true;
+            response.Message = "操作成功";
+        }catch (Exception e)
+        {
+            response.Status = false;
+            response.Message = e.getMessage();
+        }
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
+    /**
+     * 删除回答
+     */
+    @ResponseBody
+    @RequestMapping(value="accept",method = RequestMethod.POST)
+    public void accept(HttpServletResponse out, String id) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        try {
+            _service.accept(id);
+            response.Status = true;
+            response.Message = "操作成功";
+        }catch (Exception e)
+        {
+            response.Status = false;
+            response.Message = e.getMessage();
+        }
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
 
 }

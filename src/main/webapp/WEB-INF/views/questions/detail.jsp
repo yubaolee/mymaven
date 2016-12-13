@@ -144,21 +144,13 @@
                         {{# if(user.auth == 1 || user.auth == 2 || (user.name && myself && !myda)){ }}
                         <div class="jieda-admin">
                             {{# if(user.auth == 1 || (user.auth == 2 && item.accept != 1)){ }}
-                            <span type="edit">
-                编辑
-              </span>
-                            <span type="del">
-                删除
-              </span>
-                            {{# if(rows.accept == -1){ }}
-                            <span class="jieda-accept" type="accept">
-                采纳
-              </span>
+                            <span type="edit">编辑</span>
+                            <span type="del">删除</span>
+                            {{# if(rows.accept == undefined){ }}
+                            <span class="jieda-accept" type="accept">采纳 </span>
                             {{# } }}
                             {{# } else if(rows.accept == -1 && !myda){ }}
-                            <span class="jieda-accept" type="accept">
-                采纳
-              </span>
+                            <span class="jieda-accept" type="accept">采纳</span>
                             {{# } }}
                         </div>
                         {{# } }}
@@ -235,6 +227,8 @@
                      html = othis.html();
                  othis.html(fly.content(html));
              });
+
+            fly.layEditor({elem: '.fly-editor'});
         });
     });
 

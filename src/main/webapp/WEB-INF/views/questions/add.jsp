@@ -77,7 +77,10 @@
                 base: '../Resources/fly/mods/'
             }).extend({
                 fly: 'index'
-            }).use('fly');
+            }).use('fly',function(){
+                var fly = layui.fly;
+                fly.layEditor({elem: '.fly-editor'});
+            });
         </script>
 
     </body>

@@ -14,9 +14,7 @@ import com.yubao.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -74,6 +72,66 @@ public class QuestionServiceImpl implements QuestionService {
         return id;
     }
 
+    public void del(String id) throws Exception {
+        User user = checkLogin();
+        if(user.getAuth() != 1)
+        {
+            throw new Exception("哇偶！快联系站长删除");
+        }
+
+        _mapper.deleteByPrimaryKey(id);
+    }
+
+    public void set(String id, String field, int rank) throws Exception {
+        User user = checkLogin();
+        if(user.getAuth() != 1 && user.getAuth() != 2)
+        {
+            throw new Exception("哇偶！这是站长那帮人干的事");
+        }
+
+        QuestionExample exp = new QuestionExample();
+        QuestionExample.Criteria criteria = exp.createCriteria();
+        criteria.andIdEqualTo(id);
+
+        Question question = _mapper.selectByPrimaryKey(id);
+
+        if(field.equals("stick"))
+        {
+            question.setStick(rank);
+        }
+        else if(field.equals("status"))
+        {
+            question.setStatus(rank);
+        }
+        _mapper.updateByExampleSelective(question, exp);
+
+    }
+
+    public void delAnswer(String id) throws Exception {
+        User user = checkLogin();
+        if(user.getAuth() != 1)
+        {
+            throw new Exception("哇偶！快联系站长删除");
+        }
+
+        _answerMapper.deleteByPrimaryKey(id);
+    }
+
+    public void accept(String id) throws Exception {
+        User user = checkLogin();
+        Answer answer = _answerMapper.selectByPrimaryKey(id);
+
+        if(user.getAuth() != 1 &&user.getAuth()!= 2 && answer.getUserid() == user.getId() )
+        {
+            throw new Exception("哇偶！你无权干涉这个问题");
+        }
+
+        Question question = _mapper.selectByPrimaryKey(answer.getAnswerto());
+        question.setAccept(answer.getId());
+
+        _mapper.updateByPrimaryKey(question);
+    }
+
     public String addAnswer(String jid, String content) throws Exception {
         User user = checkLogin();
         String id = UUID.randomUUID().toString();
@@ -84,6 +142,9 @@ public class QuestionServiceImpl implements QuestionService {
         answer.setAnswerto(jid);
         answer.setTime(new Date());
         _answerMapper.insertSelective(answer);
+
+        user.setAnswercnt(user.getAnswercnt() + 1);
+        _userMapper.updateByPrimaryKey(user);
 
         addCommontCnt(jid);
         return id;
@@ -98,6 +159,8 @@ public class QuestionServiceImpl implements QuestionService {
         addHitCnt(id);
         return q;
     }
+
+
 
 
     private User checkLogin() throws Exception {

@@ -4,8 +4,6 @@ import com.util.temp.PageObject;
 import com.util.temp.QuestionViewModel;
 import com.yubao.model.Question;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016-12-01.
  */
@@ -17,4 +15,12 @@ public interface QuestionService {
     String addAnswer(String jid, String content) throws Exception;
 
     QuestionViewModel Get(String id);
+
+    void del(String id) throws Exception;
+
+    void set(String id, String field, int rank) throws Exception;
+
+    void delAnswer(String id) throws Exception;
+
+    void accept(String id) throws Exception;
 }
