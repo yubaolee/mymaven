@@ -39,7 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
         if(size ==0) size = 10;
 
         QuestionExample exp = new QuestionExample();
-        exp.setOrderByClause("time desc");
+        exp.setOrderByClause("stick desc,time desc");
 
         if(key != null && !key.equals(""))
         {

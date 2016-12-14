@@ -45,6 +45,7 @@ public class UserController extends BaseController {
     public String logout(HttpServletResponse out) {
         Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER,"");
         cookie.setMaxAge(-1);
+        cookie.setPath("/");
         out.addCookie(cookie);
         return "clubindex";
     }

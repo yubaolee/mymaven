@@ -29,7 +29,7 @@
     }}
 
     {{# if(rows){
-    var myself = rows.user.id === user.id;
+    var myself = rows.user.id == user.uid;
     }}
     <div class="main layui-clear">
         <div class="wrap">
@@ -84,7 +84,7 @@
 
                         <span style="color:#FF7200">悬赏：{{rows.experience}}飞吻</span>
 
-                        {{# if((user.name && myself && rows.accept == -1) || user.auth == 1){ }}
+                        {{# if((user && myself && rows.accept == undefined) || user.auth == 1){ }}
                         <span class="jie-admin" type="edit"><a href="/jie/edit/{{rows.id}}">编辑此贴</a></span>
                         {{# } }}
 
@@ -103,7 +103,7 @@
 
                 <ul class="jieda photos" id="jieda">
                     {{# layui.each(jieda, function(index, item){
-                    var myda = item.user.name == user.name;
+                    var myda = item.user.id == user.uid;
                     }}
                     <li data-id="{{item.id}}" {{item.id== rows.accept ?'class="jieda-daan"' : '' }}>
                     <a name="item-{{item.time}}"></a>
@@ -137,20 +137,18 @@
                         {{ item.content }}
                     </div>
                     <div class="jieda-reply">
-                        <span type="reply">
-            <i class="iconfont icon-svgmoban53"></i>
-            回复
-          </span>
-                        {{# if(user.auth == 1 || user.auth == 2 || (user.name && myself && !myda)){ }}
+                        <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
+                        {{# if(user.auth == 1 || user.auth == 2 || (user.uid && myself && !myda)){ }}
                         <div class="jieda-admin">
                             {{# if(user.auth == 1 || (user.auth == 2 && item.accept != 1)){ }}
-                            <span type="edit">编辑</span>
-                            <span type="del">删除</span>
-                            {{# if(rows.accept == undefined){ }}
-                            <span class="jieda-accept" type="accept">采纳 </span>
+                                <span type="edit">编辑</span>
+                                <span type="del">删除</span>
+                                {{# if(rows.accept == undefined){ }}
+                                <span class="jieda-accept" type="accept">采纳 </span>
+                                {{# } }}
                             {{# } }}
-                            {{# } else if(rows.accept == -1 && !myda){ }}
-                            <span class="jieda-accept" type="accept">采纳</span>
+                            {{# if(rows.accept == undefined && !myda){ }}
+                                <span class="jieda-accept" type="accept">采纳</span>
                             {{# } }}
                         </div>
                         {{# } }}

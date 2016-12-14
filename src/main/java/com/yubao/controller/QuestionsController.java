@@ -1,6 +1,7 @@
 package com.yubao.controller;
 
 import com.yubao.model.Question;
+import com.yubao.model.User;
 import com.yubao.service.LoginService;
 import com.yubao.service.QuestionService;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ import java.io.IOException;
 public class QuestionsController extends BaseController {
     @Resource
     QuestionService _service;
+
+    @Resource
+    LoginService loginService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
@@ -52,6 +56,10 @@ public class QuestionsController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add() {
+        User user = loginService.get();
+        if(user == null){
+            return "login";
+        }
         return "questions/add";
     }
 
@@ -152,7 +160,7 @@ public class QuestionsController extends BaseController {
     }
 
     /**
-     * 删除回答
+     * 采纳
      */
     @ResponseBody
     @RequestMapping(value="accept",method = RequestMethod.POST)

@@ -58,7 +58,7 @@
                     laydate = layui.laydate;
                 //监听提交
                 form.on('submit(*)', function(data) {
-                    $.post("check", data.field,
+                    $.post("/user/check", data.field,
                         function(obj) {
                             if (obj.Status) {
                                 location.href = "../club/index";
