@@ -5,18 +5,17 @@
  */
 
 
-layui.define(['layer', 'laytpl', 'form', 'upload', 'util'], function(exports) {
+layui.define(['layer', 'form', 'upload', 'util'], function(exports) {
 
     var $ = layui.jquery,
         layer = layui.layer,
-        laytpl = layui.laytpl,
         form = layui.form(),
         util = layui.util,
         device = layui.device()
 
     //阻止IE7以下访问
     if (device.ie && device.ie < 8) {
-        layer.alert('如果您非得使用ie浏览Fly社区，那么请使用ie8+');
+        layer.alert('如果您非得使用ie浏览OpenAuth.Net社区，那么请使用ie8+');
     }
 
     layui.focusInsert = function(obj, str) {
@@ -234,7 +233,7 @@ layui.define(['layer', 'laytpl', 'form', 'upload', 'util'], function(exports) {
         //新消息通知
         ,
         newmsg: function() {
-            if (layui.cache.user.uid !== -1) {
+            //if (layui.cache.user.uid !== -1) {
                 // gather.json('/api/msg-count', {
                 //     _: new Date().getTime()
                 // }, function(res) {
@@ -250,7 +249,7 @@ layui.define(['layer', 'laytpl', 'form', 'upload', 'util'], function(exports) {
                 //         });
                 //     }
                 // });
-            }
+           // }
             return arguments.callee;
         }
 
