@@ -55,12 +55,35 @@ public class UserController extends BaseController {
         return "clubindex";
     }
 
+    /**
+     * 获取登陆的用户
+     * @param request
+     * @param out
+     * @throws IOException
+     */
     @ResponseBody
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public void getUser(HttpServletRequest request, HttpServletResponse out) throws IOException {
         out.setContentType("text/html; charset=utf-8");
         Response resp = new Response();
         User user = loginService.get();
+        if(user == null){
+            resp.Status = false;
+            resp.Result = null;
+        }else{
+            resp.Status = true;
+            resp.Result = UserViewModel.From(user);
+        }
+
+        out.getWriter().print(gson.toJson(resp));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getbyid", method = RequestMethod.GET)
+    public void getbyid(String uid, HttpServletResponse out) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        Response resp = new Response();
+        User user = service.selectByPrimaryKey(uid);
         if(user == null){
             resp.Status = false;
             resp.Result = null;

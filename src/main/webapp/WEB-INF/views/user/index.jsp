@@ -19,9 +19,9 @@
 
 <jsp:include page="../layoutbbs/header.jsp"></jsp:include>
 
-<script id="detail" type="text/html">
+<script id="userinfo" type="text/html">
     {{#
-    var info = layui.cache.user || {}, jie = d.objects, da = d.objects;
+      var info = d || {};
     }}
 
 
@@ -53,6 +53,10 @@
           <span lay-event="">添加好友</span>
         </div>-->
     </div>
+</script>
+<div id="user"></div>
+
+
 
     <div class="main layui-clear">
         <div class="fly-main layui-clear">
@@ -61,6 +65,11 @@
                 <a href="">主页</a>
                 <!--<a href="">求解</a>-->
             </div>
+
+            <script id="detail" type="text/html">
+                {{#
+                var jie = d.objects, da = d.objects;
+                }}
             <div class="home-left">
                 <h2>最近发表的求解</h2>
                 <ul class="jie-row">
@@ -100,26 +109,50 @@
                     {{# }; }}
                 </ul>
             </div>
-            <div class="home-right">
-                <ul class="home-info">
-                    <li><i class="iconfont icon-zuichun"></i>拥有飞吻：<span style="color: #FF7200;">{{info.experience}}</span></li>
-                    <li><i class="iconfont icon-shijian"></i>加入时间：<span>{{info.createtime}}</span></li>
-                    <li><i class="iconfont icon-chengshi"></i>城市：<span>{{= info.city||'中国 某城'}}</span></li>
-                </ul>
-                <!-- layer-300*250 -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:300px;height:250px"
-                     data-ad-client="ca-pub-6111334333458862"
-                     data-ad-slot="2182025432"></ins>
-
-            </div>
-        </div>
-    </div>
 </script>
 <div id="details"></div>
 
+            <script id="user-rightscript" type="text/html">
+                {{#
+                var info = d || {};
+                }}
+                <div class="home-right">
+                    <ul class="home-info">
+                        <li><i class="iconfont icon-zuichun"></i>拥有飞吻：<span style="color: #FF7200;">{{info.experience}}</span></li>
+                        <li><i class="iconfont icon-shijian"></i>加入时间：<span>{{info.createtime}}</span></li>
+                        <li><i class="iconfont icon-chengshi"></i>城市：<span>{{= info.city||'中国 某城'}}</span></li>
+                    </ul>
+
+                </div>
+            </script>
+            <div id="user-right"></div>
+        </div>
+    </div>
+
+
 <jsp:include page="../layoutbbs/footer.jsp "></jsp:include>
 <script>
+    $.get("/user/getbyid", { //个人资料
+        uid: QueryString['uid'],
+    }, function (data) {
+        var obj = JSON.parse(data);
+
+        layui.use(['jquery', 'laytpl'], function () {
+            var $ = layui.jquery;
+            var laytpl = layui.laytpl;
+
+            var getTpl = $("#userinfo").html();
+            laytpl(getTpl).render(obj.Result, function (html) {
+                $("#user").html(html);
+            });
+
+            var getTpl = $("#user-rightscript").html();
+            laytpl(getTpl).render(obj.Result, function (html) {
+                $("#user-right").html(html);
+            });
+        });
+    });
+
     $.get("/questions/getbyuser", { //问题详情
         uid: QueryString['uid'],
         index:1,
