@@ -23,7 +23,7 @@
         {{# if(d.Status){ }}
         <!-- 登入后的状态 -->
 
-        <a class="avatar" href="user/index.html">
+        <a class="avatar" href="/user/index?uid={{d.Result.id}}">
         {{# if(d.Result.pic !=""){}}
            <img src="../Resources/fly/images/avatar/{{= d.Result.pic}}">
             {{# } }}

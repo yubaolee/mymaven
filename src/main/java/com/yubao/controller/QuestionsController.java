@@ -180,4 +180,25 @@ public class QuestionsController extends BaseController {
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "/getbyuser", method = RequestMethod.GET)
+    public void getbyuser(HttpServletResponse out, String uid, int index, int size) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        response.Status = true;
+        response.Result = _service.getbyuser(uid, index, size);
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getbyuseranswer", method = RequestMethod.GET)
+    public void getByUserAnswer(HttpServletResponse out, String uid, int index, int size) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        response.Status = true;
+        response.Result = _service.getByUserAnswer(uid, index, size);
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
 }

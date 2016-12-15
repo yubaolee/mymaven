@@ -108,7 +108,7 @@
                     <li data-id="{{item.id}}" {{item.id== rows.accept ?'class="jieda-daan"' : '' }}>
                     <a name="item-{{item.time}}"></a>
                     <div class="detail-about detail-about-reply">
-                        <a class="jie-user" href="/u/{{168*item.user.id}}/">
+                        <a class="jie-user" href="/user/index?uid={{item.user.id}}">
                             <img src="../Resources/fly/images/avatar/{{item.user.pic}}" alt="{{item.user.name}}">
                             <cite>
                                 <i>{{item.user.name}}</i>

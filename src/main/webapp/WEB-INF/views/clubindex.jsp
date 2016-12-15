@@ -43,7 +43,7 @@
                             <ul>
                                 {{# layui.each(d.Result.objects, function(index, item){ }}
                                 <li class="fly-list-li">
-                                    <a href="#" class="fly-list-avatar">
+                                    <a href="/user/index?uid={{item.user.id}}" class="fly-list-avatar">
                                         <img src="../Resources/fly/images/avatar/{{item.user.pic}}" alt="">
                                     </a>
                                     <h2 class="fly-tip">
@@ -79,7 +79,7 @@
                          <script id="user" type="text/html">
                             <ul>
                                 {{# layui.each(d.Result.objects, function(index, item){ }}
-                                 <a href="user/home.html">
+                                 <a href="/user/index?uid={{item.id}}">
                                 <img src="../Resources/fly/images/avatar/{{ item.pic }}">
                                 <cite>{{ item.name }}</cite>
                                 <i>{{ item.answercnt }}次回答</i>

@@ -132,6 +132,56 @@ public class QuestionServiceImpl implements QuestionService {
         _mapper.updateByPrimaryKey(question);
     }
 
+    public PageObject<QuestionViewModel> getbyuser(String uid, int index, int size) {
+        if(index == 0) index = 1;
+        if(size ==0) size = 10;
+
+        QuestionExample exp = new QuestionExample();
+        exp.setOrderByClause("time desc");
+
+        QuestionExample.Criteria criteria = exp.createCriteria();
+        criteria.andUseridEqualTo(uid);
+
+        PageObject<QuestionViewModel> obj = new PageObject<QuestionViewModel>();
+        obj.size = size;
+        obj.index = index;
+        obj.setTotal(_mapper.countByExample(exp));
+
+        int startindex = (index-1)*size;
+        exp.setOffset(startindex);
+        exp.setLimit(size);
+
+
+        obj.objects =_mapper.getQuestionVMs(exp);
+
+        return obj;
+    }
+
+    public PageObject<QuestionViewModel> getByUserAnswer(String uid, int index, int size) {
+        if(index == 0) index = 1;
+        if(size ==0) size = 10;
+
+        QuestionExample exp = new QuestionExample();
+        exp.setOrderByClause("time desc");
+
+        QuestionExample.Criteria criteria = exp.createCriteria();
+        criteria.andUseridEqualTo(uid);
+
+        PageObject<QuestionViewModel> obj = new PageObject<QuestionViewModel>();
+        obj.size = size;
+        obj.index = index;
+        obj.setTotal(_mapper.countByExample(exp));
+
+        int startindex = (index-1)*size;
+        exp.setOffset(startindex);
+        exp.setLimit(size);
+
+
+        obj.objects =_mapper.getQuestionVMs(exp);
+
+        return obj;
+    }
+
     public String addAnswer(String jid, String content) throws Exception {
         User user = checkLogin();
         String id = UUID.randomUUID().toString();

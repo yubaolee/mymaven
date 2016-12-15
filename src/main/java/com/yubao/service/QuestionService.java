@@ -23,4 +23,22 @@ public interface QuestionService {
     void delAnswer(String id) throws Exception;
 
     void accept(String id) throws Exception;
+
+    /**
+     * 获取用户的问题
+     * @param uid
+     * @param index
+     * @param size
+     * @return
+     */
+    PageObject<QuestionViewModel> getbyuser(String uid, int index, int size);
+
+    /**
+     * 获取有该用户回答的问题
+     * @param uid
+     * @param index
+     * @param size
+     * @return
+     */
+    PageObject<QuestionViewModel> getByUserAnswer(String uid, int index, int size);
 }

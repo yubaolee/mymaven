@@ -41,6 +41,11 @@ public class UserController extends BaseController {
         return "reg";
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index() {
+        return "user/index";
+    }
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletResponse out) {
         Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER,"");
