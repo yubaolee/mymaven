@@ -114,6 +114,7 @@
 
     </resultMap>
 
+    <!--根据回答用户的ID获取问题-->
     <select id="countByUserAnswer" parameterType="String" resultType="int">
         select count(*) from question q
         LEFT JOIN answer a on q.Id=a.AnswerTo
@@ -126,6 +127,7 @@
         order by a.time desc
         LIMIT #{offset}, #{limit}
     </select>
+    <!--根据回答用户的ID获取问题end-->
 
 
     <select id="getQuestionVM" resultMap="questionvmmapper" parameterType="String">

@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 
         UserExample exp = new UserExample();
 
-
+        exp.setOrderByClause("createtime desc");
         if(key != null && !key.equals(""))
         {
             UserExample.Criteria criteria = exp.createCriteria();
