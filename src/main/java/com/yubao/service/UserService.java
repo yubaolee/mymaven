@@ -1,6 +1,7 @@
 package com.yubao.service;
 
 import com.util.temp.PageObject;
+import com.util.temp.UserViewModel;
 import com.yubao.model.User;
 import com.yubao.model.UserExample;
 import org.apache.ibatis.annotations.Param;
@@ -34,5 +35,5 @@ public interface UserService {
 
     int updateByPrimaryKey(User record);
 
-    PageObject<User> Get(String key, int index, int size);
+    PageObject<UserViewModel> Get(String key, int index, int size);
 }

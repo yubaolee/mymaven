@@ -130,6 +130,9 @@ public class QuestionServiceImpl implements QuestionService {
         question.setAccept(answer.getId());
 
         _mapper.updateByPrimaryKey(question);
+
+        user.setExperience(user.getExperience() + question.getExperience());
+        _userMapper.updateByPrimaryKey(user);
     }
 
     public PageObject<QuestionViewModel> getbyuser(String uid, int index, int size) {

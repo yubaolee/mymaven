@@ -2,6 +2,7 @@ package com.yubao.service.Impl;
 
 import com.util.MD5;
 import com.util.temp.PageObject;
+import com.util.temp.UserViewModel;
 import com.yubao.dao.UserMapper;
 import com.yubao.model.Question;
 import com.yubao.model.QuestionExample;
@@ -94,7 +95,7 @@ public class UserServiceImpl implements UserService {
         return _mapper.updateByPrimaryKey(record);
     }
 
-    public PageObject<User> Get(String key, int index, int size) {
+    public PageObject<UserViewModel> Get(String key, int index, int size) {
         if(index == 0) index = 1;
         if(size ==0) size = 10;
 
@@ -107,7 +108,7 @@ public class UserServiceImpl implements UserService {
             criteria.andNameEqualTo(key);
         }
 
-        PageObject<User> obj = new PageObject<User>();
+        PageObject<UserViewModel> obj = new PageObject<UserViewModel>();
         obj.size = size;
         obj.index = index;
         obj.setTotal(_mapper.countByExample(exp));
@@ -115,7 +116,10 @@ public class UserServiceImpl implements UserService {
         int startindex = (index-1)*size;
         exp.setOffset(startindex);
         exp.setLimit(size);
-        obj.objects = _mapper.selectByExample(exp);
+        List<User> users= _mapper.selectByExample(exp);
+        if(users != null && users.size() > 0){
+            obj.objects = UserViewModel.From(users);
+        }
 
         return obj;
     }

@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="detail-about">
-                    <a class="jie-user" href="/u/{{168*rows.id}}/">
+                    <a class="jie-user" href="/user/index?uid={{rows.user.id}}">
                         <img src="../Resources/fly/images/avatar/{{rows.user.pic}}" alt="{{rows.user.name}}">
                         <cite>
                             {{rows.user.name}}
