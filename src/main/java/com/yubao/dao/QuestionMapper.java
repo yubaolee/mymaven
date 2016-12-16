@@ -35,4 +35,8 @@ public interface QuestionMapper {
     int updateByPrimaryKeySelective(Question record);
 
     int updateByPrimaryKey(Question record);
+
+    List<QuestionViewModel> getByUserAnswer(@Param("uid") String uid, @Param("offset") int index, @Param("limit") int size);
+
+    int countByUserAnswer(String uid);
 }

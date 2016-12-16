@@ -1,5 +1,6 @@
 package com.yubao.service.Impl;
 
+import com.sun.scenario.effect.Offset;
 import com.util.temp.PageObject;
 import com.util.temp.QuestionViewModel;
 import com.yubao.dao.AnswerMapper;
@@ -164,23 +165,13 @@ public class QuestionServiceImpl implements QuestionService {
         if(index == 0) index = 1;
         if(size ==0) size = 10;
 
-        QuestionExample exp = new QuestionExample();
-        exp.setOrderByClause("time desc");
-
-        QuestionExample.Criteria criteria = exp.createCriteria();
-        criteria.andUseridEqualTo(uid);
-
         PageObject<QuestionViewModel> obj = new PageObject<QuestionViewModel>();
         obj.size = size;
         obj.index = index;
-        obj.setTotal(_mapper.countByExample(exp));
+        obj.setTotal(_mapper.countByUserAnswer(uid));
 
         int startindex = (index-1)*size;
-        exp.setOffset(startindex);
-        exp.setLimit(size);
-
-
-        obj.objects =_mapper.getQuestionVMs(exp);
+        obj.objects =_mapper.getByUserAnswer(uid, startindex, size);
 
         return obj;
     }
