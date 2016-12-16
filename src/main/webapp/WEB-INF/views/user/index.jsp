@@ -66,11 +66,11 @@
                 <!--<a href="">求解</a>-->
             </div>
 
-            <script id="detail" type="text/html">
-                {{#
-                var jie = d.objects, da = d.objects;
-                }}
             <div class="home-left">
+                <script id="jiescript" type="text/html">
+                    {{#
+                    var jie = d.objects;
+                    }}
                 <h2>最近发表的求解</h2>
                 <ul class="jie-row">
                     {{# jie.forEach(function(item, index){ }}
@@ -91,6 +91,13 @@
                     <li class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></li>
                     {{# } }}
                 </ul>
+                </script>
+                <div id="jie"></div>
+
+                <script id="dascript" type="text/html">
+                    {{#
+                    var da = d.objects;
+                    }}
 
                 <h2 style="margin-top:30px;">最近的回答</h2>
                 <ul class="home-jieda">
@@ -100,7 +107,10 @@
                             <span>{{item.time}}</span>
                             在<a href="/questions/detail?id={{ item.id }}" target="_blank">{{= item.title||'求解'}}</a>中回答：
                         </p>
-                        <div class="home-dacontent">{{item.content}}</div>
+                        {{# item.answers.forEach(function(answer, i){ }}
+                        <div class="home-dacontent">{{answer.content}} --{{answer.time}}</div>
+                        {{# }); }}
+
                     </li>
                     {{# }); }}
 
@@ -108,9 +118,9 @@
                     <li class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><span>没有回答任何问题</span></li>
                     {{# }; }}
                 </ul>
+                </script>
+                <div id="da"></div>
             </div>
-</script>
-<div id="details"></div>
 
             <script id="user-rightscript" type="text/html">
                 {{#
@@ -164,9 +174,27 @@
             var $ = layui.jquery;
             var laytpl = layui.laytpl;
 
-            var getTpl = $("#detail").html();
+            var getTpl = $("#jiescript").html();
             laytpl(getTpl).render(obj.Result, function (html) {
-                $("#details").html(html);
+                $("#jie").html(html);
+            });
+        });
+    });
+
+    $.get("/questions/getbyuseranswer", { //问题详情
+        uid: QueryString['uid'],
+        index:1,
+        size:10
+    }, function (data) {
+        var obj = JSON.parse(data);
+
+        layui.use(['jquery', 'laytpl'], function () {
+            var $ = layui.jquery;
+            var laytpl = layui.laytpl;
+
+            var getTpl = $("#dascript").html();
+            laytpl(getTpl).render(obj.Result, function (html) {
+                $("#da").html(html);
             });
         });
     });
