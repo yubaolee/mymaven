@@ -140,7 +140,7 @@
     </div>
 
 
-<jsp:include page="../layoutbbs/footer.jsp "></jsp:include>
+<jsp:include page="../layoutbbs/footer.jsp"></jsp:include>
 <script>
     $.get("/user/getbyid", { //个人资料
         uid: QueryString['uid'],

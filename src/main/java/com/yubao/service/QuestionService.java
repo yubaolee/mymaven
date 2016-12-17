@@ -41,4 +41,6 @@ public interface QuestionService {
      * @return
      */
     PageObject<QuestionViewModel> getByUserAnswer(String uid, int index, int size);
+
+    PageObject<QuestionViewModel> getHot(String key, int index, int size);
 }

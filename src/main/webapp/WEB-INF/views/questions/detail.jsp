@@ -196,7 +196,7 @@
 </script>
 <div id="details"></div>
 
-<jsp:include page="../layoutbbs/footer.jsp "></jsp:include>
+<jsp:include page="../layoutbbs/footer.jsp"></jsp:include>
 <script>
     layui.cache.page = 'jie';
 

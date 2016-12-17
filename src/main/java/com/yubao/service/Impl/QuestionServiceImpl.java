@@ -176,6 +176,34 @@ public class QuestionServiceImpl implements QuestionService {
         return obj;
     }
 
+    public PageObject<QuestionViewModel> getHot(String key, int index, int size) {
+        if(index == 0) index = 1;
+        if(size ==0) size = 10;
+
+        QuestionExample exp = new QuestionExample();
+        exp.setOrderByClause("hits desc,time desc");
+
+        if(key != null && !key.equals(""))
+        {
+            QuestionExample.Criteria criteria = exp.createCriteria();
+            criteria.andTitleLike(key);
+        }
+
+        PageObject<QuestionViewModel> obj = new PageObject<QuestionViewModel>();
+        obj.size = size;
+        obj.index = index;
+        obj.setTotal(_mapper.countByExample(exp));
+
+        int startindex = (index-1)*size;
+        exp.setOffset(startindex);
+        exp.setLimit(size);
+
+
+        obj.objects =_mapper.getQuestionVMs(exp);
+
+        return obj;
+    }
+
     public String addAnswer(String jid, String content) throws Exception {
         User user = checkLogin();
         String id = UUID.randomUUID().toString();

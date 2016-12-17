@@ -40,6 +40,24 @@ public class QuestionsController extends BaseController {
         out.getWriter().print(gson.toJson(response));
     }
 
+    /**
+     * 近期热门问题
+     * @param out
+     * @param key
+     * @param index
+     * @param size
+     * @throws IOException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/gethot", method = RequestMethod.GET)
+    public void getHot(HttpServletResponse out, String key, int index, int size) throws IOException {
+        out.setContentType("text/html; charset=utf-8");
+        response.Status = true;
+        response.Result = _service.getHot(key, index, size);
+
+        out.getWriter().print(gson.toJson(response));
+    }
+
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String detail() {
         return "questions/detail";
