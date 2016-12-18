@@ -35,7 +35,7 @@ public class ApiController extends BaseController {
         if(user ==  null)
         {
             response.Status = false;
-            response.Message ="亲！等个录先~~";
+            response.Message ="亲！登个录先~~";
         }
         else{
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -44,7 +44,7 @@ public class ApiController extends BaseController {
 
             String filename = format(orginalFile.getOriginalFilename());  //服务器上的文件名
 
-            String path = request.getRealPath("/upload") +"\\"+ filename;
+            String path = request.getRealPath("/upload") +"/"+ filename;  //linux不能用\\
             File newFile=new File(path);
             //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
             orginalFile.transferTo(newFile);
