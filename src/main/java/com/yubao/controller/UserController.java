@@ -123,7 +123,7 @@ public class UserController extends BaseController {
             User u = service.check(account, pwd);
             Cookie cookie = new Cookie(Const.COOKIE_LOGIN_USER, u.getId());
             cookie.setPath("/");
-            cookie.setMaxAge(3600);
+            cookie.setMaxAge(360000);
             out.addCookie(cookie);
             response.Status = true;
         } catch (Exception e) {

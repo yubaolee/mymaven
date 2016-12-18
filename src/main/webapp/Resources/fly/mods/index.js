@@ -99,13 +99,13 @@ layui.define(['layer', 'form', 'upload', 'util'], function(exports) {
                                 var image = layero.find('input[name="image"]');
 
                                 layui.upload({
-                                    url: '/api/upload/',
+                                    url: '/api/upload',
                                     elem: '#fly-jie-upload .layui-upload-file',
                                     success: function(res) {
-                                        if (res.status == 0) {
-                                            image.val(res.url);
+                                        if (res.Status) {
+                                            image.val(res.Result);
                                         } else {
-                                            layer.msg(res.msg, { icon: 5 });
+                                            layer.msg(res.Message, { icon: 5 });
                                         }
                                     }
                                 });
