@@ -4,9 +4,11 @@
  * renderpager:是否绘制分页导航
  */
 function loadQuestions(laytpl, laypage, index, renderpager){
+    var type = QueryString['type'];
     $.get("/questions/get", {
         index: index,
-        size: 10
+        size: 10,
+        type: type
     }, function(data) {
         var obj = JSON.parse(data);
         var getTpl = $("#question").html();

@@ -9,7 +9,7 @@ import com.yubao.model.Question;
  */
 public interface QuestionService {
 
-    PageObject<QuestionViewModel> Get(String key, int index, int size);
+    PageObject<QuestionViewModel> Get(String key, String type, int index, int size);
 
     String add(Question question) throws Exception;
     String addAnswer(String jid, String content) throws Exception;

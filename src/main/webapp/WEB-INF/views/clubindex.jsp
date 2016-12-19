@@ -24,12 +24,11 @@
                 <div class="content">
                     <div class="fly-tab">
                         <span>
-          <a href="#">全部</a>
-          <a href="#">未结帖</a>
-          <a href="#">已采纳</a>
-          <a href="#">精帖</a>
-          <a href="#">我的帖</a>
-        </span>
+                          <a href="/club/index">全部</a>
+                          <a href="/club/index?type=unresolved">未结帖</a>
+                          <a href="/club/index?type=resolved">已采纳</a>
+                          <a href="/club/index?type=wonderful">精帖</a>
+                        </span>
                         <form action="http://cn.bing.com/search" class="fly-search">
                             <i class="iconfont icon-sousuo"></i>
                             <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q">
@@ -121,6 +120,7 @@
         </div>
 
         <jsp:include page="layoutbbs/footer.jsp"></jsp:include>
+        <script src="../blljs/queryString.js"></script>
         <script src="../blljs/statistics.js"></script>
         <script src="../blljs/clubindex.js"></script>
         <script>

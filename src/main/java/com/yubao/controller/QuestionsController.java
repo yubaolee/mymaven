@@ -30,12 +30,20 @@ public class QuestionsController extends BaseController {
         return "clubindex";
     }
 
+    /**
+     * @param out
+     * @param key  关键字
+     * @param type 文章类型
+     * @param index
+     * @param size
+     * @throws IOException
+     */
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public void get(HttpServletResponse out, String key, int index, int size) throws IOException {
+    public void get(HttpServletResponse out, String key, String type, int index, int size) throws IOException {
         out.setContentType("text/html; charset=utf-8");
         response.Status = true;
-        response.Result = _service.Get(key, index, size);
+        response.Result = _service.Get(key, type, index, size);
 
         out.getWriter().print(gson.toJson(response));
     }

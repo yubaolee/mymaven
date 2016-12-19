@@ -35,17 +35,27 @@ public class QuestionServiceImpl implements QuestionService {
     @Resource
     UserMapper _userMapper;
 
-    public PageObject<QuestionViewModel> Get(String key, int index, int size) {
+    public PageObject<QuestionViewModel> Get(String key, String type, int index, int size) {
         if(index == 0) index = 1;
         if(size ==0) size = 10;
+        if(type == null) type="";
 
         QuestionExample exp = new QuestionExample();
         exp.setOrderByClause("stick desc,time desc");
 
+        QuestionExample.Criteria criteria = exp.createCriteria();
+
         if(key != null && !key.equals(""))
         {
-            QuestionExample.Criteria criteria = exp.createCriteria();
             criteria.andTitleLike(key);
+        }
+
+        if (type.equals("resolved")) {  //已解决
+            criteria.andAcceptIsNotNull();
+        } else if (type.equals("unresolved")) {  //未解决
+            criteria.andAcceptIsNull();
+        } else if (type.equals("wonderful")) {    //精帖
+            criteria.andStatusGreaterThan(0);
         }
 
         PageObject<QuestionViewModel> obj = new PageObject<QuestionViewModel>();
