@@ -41,6 +41,11 @@ public class UserController extends BaseController {
         return "reg";
     }
 
+    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    public String message() {
+        return "user/message";
+    }
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
         return "user/index";

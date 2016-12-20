@@ -1,16 +1,14 @@
 package com.yubao.service.Impl;
 
-import com.sun.scenario.effect.Offset;
 import com.util.temp.PageObject;
 import com.util.temp.QuestionViewModel;
 import com.yubao.dao.AnswerMapper;
+import com.yubao.dao.MessageMapper;
 import com.yubao.dao.QuestionMapper;
 import com.yubao.dao.UserMapper;
-import com.yubao.model.Answer;
-import com.yubao.model.Question;
-import com.yubao.model.QuestionExample;
-import com.yubao.model.User;
+import com.yubao.model.*;
 import com.yubao.service.LoginService;
+import com.yubao.service.MessageService;
 import com.yubao.service.QuestionService;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +32,9 @@ public class QuestionServiceImpl implements QuestionService {
     AnswerMapper _answerMapper;
     @Resource
     UserMapper _userMapper;
+
+    @Resource
+    MessageService _msgService;
 
     public PageObject<QuestionViewModel> Get(String key, String type, int index, int size) {
         if(index == 0) index = 1;
@@ -216,6 +217,25 @@ public class QuestionServiceImpl implements QuestionService {
 
     public String addAnswer(String jid, String content) throws Exception {
         User user = checkLogin();
+        String id = addAnswer(jid, content, user);
+
+        user.setAnswercnt(user.getAnswercnt() + 1);
+        _userMapper.updateByPrimaryKey(user);
+
+        QuestionExample exp = new QuestionExample();
+        QuestionExample.Criteria criteria = exp.createCriteria();
+        criteria.andIdEqualTo(jid);
+
+        Question question = _mapper.selectByPrimaryKey(jid);
+        question.setComment(question.getComment() + 1);
+        _mapper.updateByExampleSelective(question, exp);
+
+        _msgService.notify(user, question);
+        return id;
+
+    }
+
+    private String addAnswer(String jid, String content, User user) {
         String id = UUID.randomUUID().toString();
         Answer answer = new Answer();
         answer.setId(id);
@@ -224,14 +244,9 @@ public class QuestionServiceImpl implements QuestionService {
         answer.setAnswerto(jid);
         answer.setTime(new Date());
         _answerMapper.insertSelective(answer);
-
-        user.setAnswercnt(user.getAnswercnt() + 1);
-        _userMapper.updateByPrimaryKey(user);
-
-        addCommontCnt(jid);
         return id;
-
     }
+
 
 
 
@@ -251,16 +266,6 @@ public class QuestionServiceImpl implements QuestionService {
             throw new Exception("请先登录");
         }
         return user;
-    }
-
-    private void addCommontCnt(String id){
-        QuestionExample exp = new QuestionExample();
-        QuestionExample.Criteria criteria = exp.createCriteria();
-        criteria.andIdEqualTo(id);
-
-        Question question = _mapper.selectByPrimaryKey(id);
-        question.setComment(question.getComment() + 1);
-        _mapper.updateByExampleSelective(question, exp);
     }
 
     private void addHitCnt(String id){
