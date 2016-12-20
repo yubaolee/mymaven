@@ -26,11 +26,14 @@ public class MessageServiceImpl implements MessageService {
     LoginService  _loginService;
 
     /**
-     * 通知问题回复
+     * 通知问题被别人回复
      * @param user
      * @param question
      */
     public void notify(User user, Question question) {
+        if(user.getId().equals(question.getUserid())) {  //自己回复自己的问题
+            return;
+        }
         Message msg = new Message();
         msg.setId(UUID.randomUUID().toString());
         msg.setTo(question.getUserid());
